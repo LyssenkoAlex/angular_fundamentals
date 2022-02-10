@@ -1,0 +1,24 @@
+h1 {
+  color:black;
+}
+
+.wrapper {
+  border: 1px solid greenyellow;
+  display: flex;
+  flex-flow: row;
+  margin: 15px;
+}
+
+.description {
+  width: 75%;
+  padding: 15px;
+}
+
+span {
+  font-weight: bold;
+}
+
+.icons {
+  display: flex;
+  justify-content:space-evenly;
+}

@@ -1,0 +1,40 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Angular",
+      "description": "Kongeriket Norge er et nordisk, europeisk land og en selvstendig stat vest på Den skandinaviske halvøy. Geografisk sett er landet langt og smalt. På den langstrakte kysten mot Nord-Atlanteren befinner Norges vidkjente fjorder seg. Kongeriket Norge omfatter, i tillegg til fastlandet, Jan Mayen og Svalbard",
+      "creationDate": "2015-06-08",
+      "duration": 90,
+      "authors": ["Alex", "Stas"]
+    },
+    {
+      "id": 2,
+      "title": "JS",
+      "description": "Kongeriket Norge er et nordisk, europeisk land og en selvstendig stat vest på Den skandinaviske halvøy. Geografisk sett er landet langt og smalt. På den langstrakte kysten mot Nord-Atlanteren befinner Norges vidkjente fjorder seg. Kongeriket Norge omfatter, i tillegg til fastlandet, Jan Mayen og Svalbard",
+      "creationDate": "2015-06-08",
+      "duration": 120,
+      "authors": ["Alex", "Stas"]},
+    {
+      "id": 3,
+      "title": "Data Base",
+      "description": "Kongeriket Norge er et nordisk, europeisk land og en selvstendig stat vest på Den skandinaviske halvøy. Geografisk sett er landet langt og smalt. På den langstrakte kysten mot Nord-Atlanteren befinner Norges vidkjente fjorder seg. Kongeriket Norge omfatter, i tillegg til fastlandet, Jan Mayen og Svalbard",
+      "creationDate": "2015-06-08",
+      "duration": 60,
+      "authors": ["Alex", "Stas"]},
+    {
+      "id": 4,
+      "title": "network",
+      "description": "Kongeriket Norge er et nordisk, europeisk land og en selvstendig stat vest på Den skandinaviske halvøy. Geografisk sett er landet langt og smalt. På den langstrakte kysten mot Nord-Atlanteren befinner Norges vidkjente fjorder seg. Kongeriket Norge omfatter, i tillegg til fastlandet, Jan Mayen og Svalbard",
+      "creationDate": "2015-06-08",
+      "duration": 180,
+      "authors": ["Alex", "Stas"]},
+    {
+      "id": 5,
+      "title": "Cool staf",
+      "description": "Kongeriket Norge er et nordisk, europeisk land og en selvstendig stat vest på Den skandinaviske halvøy. Geografisk sett er landet langt og smalt. På den langstrakte kysten mot Nord-Atlanteren befinner Norges vidkjente fjorder seg. Kongeriket Norge omfatter, i tillegg til fastlandet, Jan Mayen og Svalbard",
+      "creationDate": "2015-06-08",
+      "duration": 30,
+      "authors": ["Alex", "Stas"] }
+  ]
+}

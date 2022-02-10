@@ -6,6 +6,13 @@ import { LoginComponent } from './feature/login/login.component';
 import { RegistrationComponent } from './feature/registration/registration.component';
 import { CoursesComponent } from './feature/courses/courses.component';
 import { CourseComponent } from './feature/course/course.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {CoursesModule} from './feature/courses/courses.module';
+import { InfoComponent } from './layout/info/info.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { SearchComponent } from './layout/search/search.component';
+
+
 
 @NgModule({
   declarations: [
@@ -13,10 +20,15 @@ import { CourseComponent } from './feature/course/course.component';
     LoginComponent,
     RegistrationComponent,
     CoursesComponent,
-    CourseComponent
+    CourseComponent,
+    InfoComponent,
+    HeaderComponent,
+    SearchComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FontAwesomeModule,
+    CoursesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
