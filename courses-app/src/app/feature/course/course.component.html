@@ -9,9 +9,9 @@
     <p><span>Duration:</span> {{course?.duration}}</p>
     <p><span>Created:</span> {{course?.creationDate}}</p>
     <div class="icons">
-    <button value="show" type="button">Show course</button>
-    <fa-icon [icon]="faEdit"></fa-icon>
-    <fa-icon [icon]="faTrash"></fa-icon>
+    <app-button>Show course</app-button>
+      <app-button><fa-icon [icon]="faEdit"></fa-icon></app-button>
+      <app-button><fa-icon [icon]="faTrash"></fa-icon></app-button>
     </div>
   </div>
 

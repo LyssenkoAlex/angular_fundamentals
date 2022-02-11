@@ -11,6 +11,7 @@ import {CoursesModule} from './feature/courses/courses.module';
 import { InfoComponent } from './layout/info/info.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SearchComponent } from './layout/search/search.component';
+import { ButtonComponent } from './layout/button/button.component';
 
 
 
@@ -24,6 +25,7 @@ import { SearchComponent } from './layout/search/search.component';
     InfoComponent,
     HeaderComponent,
     SearchComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,

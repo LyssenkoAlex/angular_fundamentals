@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  flex-flow: row;
+}
+
+.logo {
+  width: 75%;
+}
+
+.button_wrapper {
+  margin: 20px;
+}
+.title {
+  margin-left: 15px;
+}

@@ -1,1 +1,10 @@
-<p>header works!</p>
+<header>
+  <div class="logo">
+    <img [src]="imagePath" alt="image"/>
+    <span class="title">{{title}}</span>
+  </div>
+  <div>
+    <app-button class="button_wrapper">{{userName}}</app-button>
+    <app-button class="button_wrapper">{{logOut}}</app-button>
+  </div>
+</header>
