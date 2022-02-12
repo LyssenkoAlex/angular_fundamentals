@@ -1,0 +1,7 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+}

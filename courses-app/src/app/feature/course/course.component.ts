@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import {Course} from '../../data/schema/Course';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-course',
@@ -12,6 +13,13 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class CourseComponent {
   faEdit = faEdit;
   faTrash = faTrash;
- @Input() course: Course | undefined;
+  @Input() editable:boolean = false
+  @Input() course: Course | undefined;
 
+
+  @Output() newItemEvent = new EventEmitter<string>();
+
+  addNewItem(value: string|undefined) {
+    this.newItemEvent.emit(value);
+  }
 }

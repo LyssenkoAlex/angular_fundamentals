@@ -1,0 +1,13 @@
+button {
+  color: darkgray;
+  margin: 5px;
+}
+button:hover{
+  color: grey;
+}
+button:focus {
+  color: black;
+}
+button:active{
+  background-color: black;
+}

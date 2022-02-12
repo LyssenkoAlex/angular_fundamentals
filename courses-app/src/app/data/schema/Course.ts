@@ -4,4 +4,6 @@ export interface Course {
   creationDate: string
   duration: number
   authors: string[]
+  durationView?:string
+  dateView?:string
 }
