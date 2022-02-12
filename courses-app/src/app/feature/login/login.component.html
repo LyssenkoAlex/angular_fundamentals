@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="form-group">
+  <label>Phone
+    <input
+      type="text"
+      class="form-control"
+      name="phone"
+      [(ngModel)]="email"
+      #emailNgModel="ngModel"
+      appEmailValidator
+      [class.is-invalid]="(emailNgModel.touched || emailNgModel.dirty) && emailNgModel.errors"
+    >
+  </label>
+  <span
+    class="invalid-feedback"
+    *ngIf="(emailNgModel.touched || emailNgModel.dirty) && emailNgModel.errors"
+  >
+      Email must be xxxx@xxx.xx
+  </span>
+</div>
