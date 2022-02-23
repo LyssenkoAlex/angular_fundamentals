@@ -17,6 +17,9 @@ import {SearchPipe} from "./layout/search/search.pipe";
 import {CreateCourseComponent, DateConvert, DurationConvert} from './feature/create-course/create-course.component';
 import {SharedModule} from "./shared/shared.module";
 import { PasswordToggleDirective } from './validators/password-toggle.directive';
+import {AppRoutingModule} from "./app-routing/app-routing.module";
+import { CourseDetailsComponent } from './feature/course-details/course-details.component';
+import { EditCourseComponent } from './feature/edit-course/edit-course.component';
 
 
 
@@ -36,6 +39,9 @@ import { PasswordToggleDirective } from './validators/password-toggle.directive'
     DurationConvert,
     DateConvert,
     PasswordToggleDirective,
+    CreateCourseComponent,
+    CourseDetailsComponent,
+    EditCourseComponent
   ],
     imports: [
         BrowserModule,
@@ -43,7 +49,8 @@ import { PasswordToggleDirective } from './validators/password-toggle.directive'
         CoursesModule,
         FormsModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        AppRoutingModule
     ],
   providers: [],
   bootstrap: [AppComponent]

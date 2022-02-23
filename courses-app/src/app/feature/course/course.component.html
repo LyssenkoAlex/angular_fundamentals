@@ -1,6 +1,13 @@
 <div class="wrapper">
   <div class="description">
-    <h1>{{course?.title}}</h1>
+    <a
+      [routerLink]="['/courses/', course?.id]">
+      View: {{ course?.title }}
+    </a>
+    <a
+      [routerLink]="['/courses/edit/', course?.id]">
+      Edit: {{ course?.title }}
+    </a>
     <p>{{course?.description}}</p>
   </div>
   <div>

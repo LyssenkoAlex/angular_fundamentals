@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CoursesComponent} from "./courses.component";
+import {CourseDetailsComponent} from "./course-details.component";
 import {SharedModule} from "../../shared/shared.module";
 import {RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
-  { path: '', component: CoursesComponent }
+  { path: '', component: CourseDetailsComponent }
 ];
 
 @NgModule({
@@ -16,4 +16,4 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class CoursesModule { }
+export class CourseDetailsModule { }
