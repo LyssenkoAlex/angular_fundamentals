@@ -2,9 +2,7 @@ import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
-  ValidatorFn,
   Validators
 } from "@angular/forms";
 
@@ -44,7 +42,7 @@ function nameValidate() : {[key: string]: any} | null {
 
 export class CreateCourseComponent implements OnInit {
   form: FormGroup;
-
+  submitted = false;
   constructor(private fb: FormBuilder) {
     this.form = fb.group({
       title:[
@@ -88,7 +86,16 @@ export class CreateCourseComponent implements OnInit {
     return this.form?.get("createDate")
   }
 
+
+
   onFormSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+
     alert(JSON.stringify(this.form?.value, null, 2))
   }
 }

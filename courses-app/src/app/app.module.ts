@@ -14,9 +14,9 @@ import { SearchComponent } from './layout/search/search.component';
 import { ButtonComponent } from './layout/button/button.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SearchPipe} from "./layout/search/search.pipe";
-import { EmailValidatorDirective } from './shared/validators/email-validator.directive';
 import {CreateCourseComponent, DateConvert, DurationConvert} from './feature/create-course/create-course.component';
-import { AuthorNameDirective } from './validators/author-name.directive';
+import {SharedModule} from "./shared/shared.module";
+import { PasswordToggleDirective } from './validators/password-toggle.directive';
 
 
 
@@ -32,18 +32,18 @@ import { AuthorNameDirective } from './validators/author-name.directive';
     SearchComponent,
     ButtonComponent,
     SearchPipe,
-    EmailValidatorDirective,
     CreateCourseComponent,
-    AuthorNameDirective,
     DurationConvert,
-    DateConvert
+    DateConvert,
+    PasswordToggleDirective,
   ],
     imports: [
         BrowserModule,
         FontAwesomeModule,
         CoursesModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
   providers: [],
   bootstrap: [AppComponent]

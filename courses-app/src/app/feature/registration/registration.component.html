@@ -8,13 +8,14 @@
         <div class="form-group col">
           <label>Name</label>
           <input type="text" name="lastName" class="form-control" [(ngModel)]="model.lastName"
-                 #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required lastName minlength="2">
+                 #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required lastName minlength="6">
           <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback">
             <div *ngIf="lastName.errors?.['required']">Name is required</div>
-            <div *ngIf="lastName.errors?.['minlength']">Name must more that 2 letters</div>
+            <div *ngIf="lastName.errors?.['minlength']">Name must more that 6 letters</div>
           </div>
         </div>
-
+      </div>
+      <div class="form-row">
         <div class="form-group col">
           <label>Email</label>
           <input type="text" name="email" class="form-control" [(ngModel)]="model.email"
@@ -24,17 +25,20 @@
             <div *ngIf="email.errors?.['email']">Email must be a valid email address</div>
           </div>
         </div>
-
+        </div>
+      <div class="form-row">
         <div class="form-group col">
           <label>Password</label>
-          <input type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"
+          <input appPasswordToggle type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"
                  [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6">
+          <i class="fa fa-key fa-lg"></i>
           <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
             <div *ngIf="password.errors?.['required']">Password is required</div>
             <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</div>
           </div>
         </div>
       </div>
+
       <div class="text-center">
         <button class="btn btn-primary mr-1">Register</button>
       </div>
