@@ -1,19 +1,35 @@
-<div class="form-group">
-  <label>Phone
-    <input
-      type="text"
-      class="form-control"
-      name="phone"
-      [(ngModel)]="email"
-      #emailNgModel="ngModel"
-      appEmailValidator
-      [class.is-invalid]="(emailNgModel.touched || emailNgModel.dirty) && emailNgModel.errors"
-    >
-  </label>
-  <span
-    class="invalid-feedback"
-    *ngIf="(emailNgModel.touched || emailNgModel.dirty) && emailNgModel.errors"
-  >
-      Email must be xxxx@xxx.xx
-  </span>
+<div class="card m-3">
+  <h5 class="card-header">Login Form</h5>
+  <div class="card-body">
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+          appEmailValidator="['email']" novalidate>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Email</label>
+          <input type="text" name="email" class="form-control" [(ngModel)]="model.email"
+                 #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email>
+          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors?.['required']">Email is required</div>
+            <div *ngIf="email.errors?.['email']">Email must be a valid email address</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Password</label>
+          <input type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"
+                 [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6">
+          <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+            <div *ngIf="password.errors?.['required']">Password is required</div>
+            <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary mr-1">Login</button>
+        <p>If you do not have account you can Register</p>
+      </div>
+    </form>
+  </div>
 </div>

@@ -1,0 +1,56 @@
+<div class="card m-3">
+  <h5 class="card-header">Login Form</h5>
+  <div class="card-body">
+    <form name="form" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Title</label>
+          <input type="text" class="form-control" formControlName="title">
+          <span *ngIf="title?.errors && (title?.dirty || title?.touched)">Title is required</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Description</label>
+          <input type="text" class="form-control" formControlName="description">
+          <span
+            *ngIf="description?.errors && (description?.dirty || description?.touched)">Description is required</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Author name</label>
+          <input type="text" class="form-control" formControlName="authorName">
+          <span
+            *ngIf="authorName?.errors?.['forbiddenName'] && (authorName?.dirty || authorName?.touched)">Name {{ authorName?.value }}
+            is forbidden</span>
+
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Duration</label>
+          <input type="number"
+                 class="form-control" formControlName="duration" min="1" max="10000" required>
+          <span>Duration: {{duration?.value | durationConvert}}</span>
+          <div *ngIf="duration?.errors?.['required']">Duration is required</div>
+          <div *ngIf="duration?.errors?.['min']">Duration should be more that 0</div>
+          <div *ngIf="duration?.errors?.['max']">Duration should be not more that 10000</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Creation date</label>
+          <input type="date"
+                 class="form-control" formControlName="createDate" required>
+          <span>Create Date: {{createDate?.value | dateConvert}}</span>
+          <div *ngIf="createDate?.errors?.['required']">Create date is required</div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" [disabled]="!form.valid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
