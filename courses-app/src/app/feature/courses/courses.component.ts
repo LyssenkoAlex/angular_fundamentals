@@ -4,6 +4,8 @@ import data from '../../data/mock.json'
 import {AuthorsStoreService} from "../../services/authors-store.service";
 import {AuthorModel} from "../../models/Author";
 import {Actions} from "../../models/Actions";
+import {CourseModel} from "../../models/CourseModel";
+import {CoursesStoreService} from "../../services/courses-store.service";
 
 @Component({
   selector: 'app-courses',
@@ -14,7 +16,6 @@ export class CoursesComponent {
   public foods: Object | undefined;
   searchValue: string = '';
   condition: boolean = false;
-  courses: Course[] = this.getData()
   items: [string] = [''];
   search: string = ''
   res_list: [string] = [''];
@@ -22,19 +23,29 @@ export class CoursesComponent {
   prevText: string = '';
   list_lang = ['java', 'c++', 'python', 'c', 'javascript'];
 
+  courses: CourseModel[] | undefined
+  isLoading: boolean  = true
+
+  constructor(private store:CoursesStoreService) {
+    console.log('loading: ', this.isLoading)
+  }
+
+  ngOnInit() {
+    this.store.courseData.subscribe((data) => {
+      this.courses = data
+    })
+
+    this.store.isLoading$$.subscribe((data) => {
+      this.isLoading = data
+      console.log('loading: ', this.isLoading)
+    })
+  }
+
+
   addItem(newItem: string) {
     this.items?.push(newItem);
   }
 
-
-  getData(): Course[] {
-
-    return data.projects.map((item: Course) => {
-      item.durationView = `${(item.duration - (item.duration % 60)) / 60} h ${(item.duration % 60)} m`
-      item.dateView = new Date(item.creationDate).toISOString().split('T')[0]
-      return item;
-    })
-  }
 
   onSubmit($event: any) {
 

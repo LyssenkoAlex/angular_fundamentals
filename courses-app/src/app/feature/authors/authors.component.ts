@@ -10,15 +10,21 @@ import {Actions} from "../../models/Actions";
 })
 export class AuthorsComponent  implements OnInit {
 
-  authors: AuthorModel | undefined
+  authors: AuthorModel[] | undefined
+  isLoading: boolean  = true
 
-  constructor(private store:AuthorsStoreService) {}
+  constructor(private store:AuthorsStoreService) {
+    console.log('loading: ', this.isLoading)
+  }
 
   ngOnInit() {
-    console.log('step AUTH', this.store.authorsData)
     this.store.authorsData.subscribe((data) => {
-      console.log("AuthorsComponent: ", data)
       this.authors = data
+    })
+
+    this.store.isLoading$$.subscribe((data) => {
+      this.isLoading = data
+      console.log('loading: ', this.isLoading)
     })
   }
 

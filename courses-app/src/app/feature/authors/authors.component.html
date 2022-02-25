@@ -1,4 +1,10 @@
-<p>authors works!11</p>
-<p>
-  {{authors?.name}}
-</p>
+
+
+<div *ngIf="isLoading">
+  LOADING
+</div>
+
+<div *ngFor="let author of authors">
+  <p>Name: {{author.name}}</p>
+</div>
+
