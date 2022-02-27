@@ -10,9 +10,12 @@ import {CoursesService} from "./courses.service";
 })
 export class CoursesStoreService {
 
-  public courseData: BehaviorSubject<Array<CourseModel>> = new BehaviorSubject<Array<CourseModel>>([])
-  private _isLoading: boolean = false;
-  public isLoading$$: BehaviorSubject<boolean> = new BehaviorSubject(this._isLoading);
+  private courses$$: BehaviorSubject<Array<CourseModel>> = new BehaviorSubject<Array<CourseModel>>([])
+  public courses$ = this.courses$$.asObservable();
+
+  private isLoading$$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  public isLoading$  = this.isLoading$$.asObservable();
+
 
   constructor(private authorService: CoursesService) {
     this.authorService.setActionRunnerFn = this.processAction.bind(this)
@@ -32,7 +35,7 @@ export class CoursesStoreService {
 
       case(action === Actions.RECEIVED_COURSES):
         console.log('processAction RECEIVED_COURSE', data);
-        this.courseData.next(data)
+        this.courses$$.next(data)
         this.isLoading$$.next(false);
         break;
     }

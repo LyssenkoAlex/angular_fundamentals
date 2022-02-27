@@ -31,14 +31,8 @@ export class CoursesComponent {
   }
 
   ngOnInit() {
-    this.store.courseData.subscribe((data) => {
-      this.courses = data
-    })
-
-    this.store.isLoading$$.subscribe((data) => {
-      this.isLoading = data
-      console.log('loading: ', this.isLoading)
-    })
+    this.store.courses$.subscribe(data => this.courses = data)
+    this.store.isLoading$.subscribe(data => this.isLoading = data)
   }
 
 

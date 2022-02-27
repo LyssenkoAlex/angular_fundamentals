@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {AuthorModel} from "../models/Author";
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {AuthorsService} from "./authors.service";
 import {Actions} from "../models/Actions";
-
 
 
 @Injectable({
@@ -12,9 +11,10 @@ import {Actions} from "../models/Actions";
 export class AuthorsStoreService {
 
 
-  public authorsData: BehaviorSubject<Array<AuthorModel>> = new BehaviorSubject<Array<AuthorModel>>([])
-  private _isLoading: boolean = false;
-  public isLoading$$: BehaviorSubject<boolean> = new BehaviorSubject(this._isLoading);
+  private authors$$: BehaviorSubject<Array<AuthorModel>> = new BehaviorSubject<Array<AuthorModel>>([])
+  public authors$ = this.authors$$.asObservable();
+  private isLoading$$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  public isLoading$ = this.isLoading$$.asObservable();
 
   constructor(private authorService: AuthorsService) {
     this.authorService.setActionRunnerFn = this.processAction.bind(this)
@@ -34,11 +34,9 @@ export class AuthorsStoreService {
 
       case(action === Actions.RECEIVED_AUTHORS):
         console.log('processAction RECEIVED_AUTHORS', data);
-        this.authorsData.next(data)
+        this.authors$$.next(data)
         this.isLoading$$.next(false);
         break;
     }
   }
-
-
 }
