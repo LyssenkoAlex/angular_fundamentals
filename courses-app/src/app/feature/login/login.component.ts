@@ -1,5 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from "../../auth/services/auth.service";
+import {first} from 'rxjs/operators';
+import {Router, ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -8,16 +12,21 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   model: any = {};
-  @Input() verified:boolean = false
+  @Input() verified: boolean = false
 
   ngOnInit(): void {
   }
+
   @Output() newItemEvent = new EventEmitter<boolean>();
 
+  constructor(private authService: AuthService, private route: ActivatedRoute,
+              private router: Router,) {
+  }
+
   onSubmit() {
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model, null, 4));
     console.log('model: ', this.model)
-    this.newItemEvent.emit(true)
+
+    this.authService.login(this.model.email, this.model.password)
 
   }
 

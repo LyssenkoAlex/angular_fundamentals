@@ -19,7 +19,7 @@
         <div class="form-group col">
           <label>Password</label>
           <input type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"
-                 [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6">
+                 [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" autocomplete="password">
           <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
             <div *ngIf="password.errors?.['required']">Password is required</div>
             <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters</div>
