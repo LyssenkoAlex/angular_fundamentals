@@ -1,8 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../../auth/services/auth.service";
-import {first} from 'rxjs/operators';
-import {Router, ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -19,16 +16,13 @@ export class LoginComponent implements OnInit {
 
   @Output() newItemEvent = new EventEmitter<boolean>();
 
-  constructor(private authService: AuthService, private route: ActivatedRoute,
-              private router: Router,) {
-  }
+  constructor(private authService: AuthService) {}
 
   onSubmit() {
-    console.log('model: ', this.model)
-
     this.authService.login(this.model.email, this.model.password)
-
   }
 
-
+  logout () {
+    this.authService.logout()
+  }
 }

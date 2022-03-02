@@ -20,8 +20,9 @@ import {PasswordToggleDirective} from './validators/password-toggle.directive';
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 import {CourseDetailsComponent} from './feature/course-details/course-details.component';
 import {EditCourseComponent} from './feature/edit-course/edit-course.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AuthorsComponent } from './feature/authors/authors.component';
+import {TokenInterceptorService} from "./auth/interceptors/token.interceptor";
 
 
 @NgModule({
@@ -55,7 +56,11 @@ import { AuthorsComponent } from './feature/authors/authors.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule {

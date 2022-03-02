@@ -1,26 +1,22 @@
-
-
-
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import {BehaviorSubject,  Observable, throwError } from 'rxjs';
+import { HttpRequest,  HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {Observable } from 'rxjs';
 
-import { map, catchError } from 'rxjs/operators';
 
-import { AuthService } from '../services/auth.service';
+import {SessionStorageService} from "../services/session-storage.service";
 
 @Injectable()
 
 export class TokenInterceptorService implements HttpInterceptor {
 
   constructor(
-    private authService: AuthService,
+    private sessionService: SessionStorageService,
 
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const token: string | null = localStorage.getItem('token');
+    const token: string | null = this.sessionService.getToken('token');
 
     if (token) {
       request = request.clone({ headers: request.headers.set('Authorization', token) });
@@ -32,5 +28,4 @@ export class TokenInterceptorService implements HttpInterceptor {
       return next.handle(request);
     }
   }
-
 }

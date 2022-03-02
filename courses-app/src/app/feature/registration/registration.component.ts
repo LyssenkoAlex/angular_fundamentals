@@ -1,4 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {AuthService} from "../../auth/services/auth.service";
+import {UserModel} from "../../models/UserModel";
 
 @Component({
   selector: 'app-registration',
@@ -12,13 +14,13 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  @Output() newItemEvent = new EventEmitter<boolean>();
+
+  constructor(private authService: AuthService) {}
 
   onSubmit() {
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model, null, 4));
     console.log('model: ', this.model)
-    this.newItemEvent.emit(true)
-
+    const user:UserModel = {name:this.model.lastName, email:this.model.email, password:this.model.password, role:''}
+    this.authService.register(user)
   }
 
 }

@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {UserModel} from "../../models/UserModel";
 import {Router} from "@angular/router";
+import {SessionStorageService} from "./session-storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthService {
   public currentUser = this.currentUserSubject.asObservable()
 
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private sessionStorageService: SessionStorageService) {
   }
 
   public get currentUserValue() {
@@ -35,23 +36,24 @@ export class AuthService {
     if (data.successful) {
       this.currentUserSubject.next(data);
       this.isAuthorized$$.next(true)
-      localStorage.setItem('currentUser', data);
-      console.log('login: ', data)
+      this.sessionStorageService.setToken("token", data.result)
     } else {
       this.router.navigate(['/login']);
     }
-
   }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-    this.isAuthorized$$.next(false)
+  logout  ()  {
+    const token: string = this.sessionStorageService.getToken('token')
+    const headers = {'Authorization': token};
+    this.http.delete(this.API_LOGOUT, {headers}).subscribe((data) => {
+      console.log('logout: ', data)
+    });
   }
 
-  register = async () => {
-    const data: any = await this.http.get(this.API_REGISTER).toPromise();
-    this.isAuthorized$$.next(true)
+  register =  (model:UserModel) => {
+    this.http.post(this.API_REGISTER, model).subscribe((result) => {
+        console.log("result: ", result)
+    })
   }
 
 }

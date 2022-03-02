@@ -1,28 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from "@angular/core";
 
-@Injectable()
-export class WindowRefService {
-  get nativeWindow (): any {
-    return getWindow();
-  }
-}
-
-function getWindow (): any {
-  return window;
-}
+@Injectable({
+  providedIn: 'root'
+})
 
 export class SessionStorageService {
 
   constructor() { }
   setToken(key:string, value:string) {
-    getWindow().localStorage.setItem(key, value)
+    sessionStorage.setItem(key, value)
   }
 
-  getToken(key: string) {
-    getWindow().localStorage.getItem(key)
+  getToken(key: string):string {
+    const token = sessionStorage.getItem(key)
+    return token == null ? "empty" : token
   }
 
   deleteToken(key:string) {
-    getWindow().localStorage.removeItem(key)
+    sessionStorage.removeItem(key)
   }
 }
