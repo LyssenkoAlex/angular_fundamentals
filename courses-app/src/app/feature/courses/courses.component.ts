@@ -21,9 +21,7 @@ export class CoursesComponent {
   courses: CourseModel[] | undefined
   isLoading: boolean  = true
 
-  constructor(private store:CoursesStoreService) {
-    console.log('loading: ', this.isLoading)
-  }
+  constructor(private store:CoursesStoreService) {}
 
   ngOnInit() {
     this.store.courses$.subscribe(data => this.courses = data)

@@ -5,6 +5,8 @@ import {
   FormGroup,
   Validators
 } from "@angular/forms";
+import {CoursesStoreService} from "../../services/courses-store.service";
+import {Actions} from "../../models/Actions";
 
 @Pipe({ name: 'durationConvert'})
 export class DurationConvert implements PipeTransform{
@@ -43,7 +45,7 @@ function nameValidate() : {[key: string]: any} | null {
 export class CreateCourseComponent implements OnInit {
   form: FormGroup;
   submitted = false;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store:CoursesStoreService) {
     this.form = fb.group({
       title:[
         "", [Validators.required]
@@ -90,12 +92,11 @@ export class CreateCourseComponent implements OnInit {
 
   onFormSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
-
-    alert(JSON.stringify(this.form?.value, null, 2))
+    this.form.value.authors = ['9b87e8b8-6ba5-40fc-a439-c4e30a373d36']
+    this.store.processAction(Actions.ADD_COURSES, this.form?.value)
   }
 }

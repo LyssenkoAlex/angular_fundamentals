@@ -13,24 +13,27 @@ export class CoursesStoreService {
   private courses$$: BehaviorSubject<Array<CourseModel>> = new BehaviorSubject<Array<CourseModel>>([])
   public courses$ = this.courses$$.asObservable();
 
+  private course$$: BehaviorSubject<CourseModel|null> = new BehaviorSubject<CourseModel|null>(null)
+  public course$ = this.course$$.asObservable();
+
   private isLoading$$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
   public isLoading$  = this.isLoading$$.asObservable();
 
 
-  constructor(private authorService: CoursesService) {
-    this.authorService.setActionRunnerFn = this.processAction.bind(this)
+  constructor(private courseService: CoursesService) {
+    this.courseService.setActionRunnerFn = this.processAction.bind(this)
   }
 
   processAction = async (action: string, data: any) => {
     switch (true) {
       case (action === Actions.INIT_COURSES):
         console.log('processAction INIT_COURSE');
-        this.authorService.triggerActionRunner()
+        this.courseService.triggerActionRunner()
         break;
       case(action === Actions.ALL_COURSES):
         console.log('processAction ALL_COURSES');
         this.isLoading$$.next(true);
-        this.authorService.getAll()
+        this.courseService.getAll()
         break;
 
       case(action === Actions.RECEIVED_COURSES):
@@ -38,7 +41,19 @@ export class CoursesStoreService {
         this.courses$$.next(data)
         this.isLoading$$.next(false);
         break;
+
+      case(action === Actions.ADD_COURSES):
+        console.log('add course', data);
+        this.courseService.addCourse(data)
+        break;
+      case (action === Actions.COURSE_BY_ID):
+        console.log('add course', data);
+        this.courseService.getById(data)
+        break;
+      case(action === Actions.RECEIVED_COURSE_BY_ID):
+        console.log('processAction RECEIVED_COURSE', data);
+        this.course$$.next(data)
+        break;
     }
   }
-
 }

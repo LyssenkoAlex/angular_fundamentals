@@ -25,7 +25,7 @@ import {AdminGuard} from "../auth/admin.guard";
       },
       {
         path: 'courses/add',
-        canLoad: [AdminGuard],
+        canActivate: [AdminGuard],
         loadChildren: () => import('../feature/create-course/create-course.module').then(m => m.CreateCourseModule)
       },
       {
@@ -35,7 +35,7 @@ import {AdminGuard} from "../auth/admin.guard";
       },
       {
         path: 'courses/edit/:id',
-        canLoad: [AdminGuard],
+        canActivate: [AdminGuard],
         loadChildren: () => import('../feature/edit-course/edit-course.module').then(m => m.EditCourseModule)
       },
       {path: 'authors', loadChildren: () => import('../feature/authors/authors.module').then(m => m.AuthorsModule)},

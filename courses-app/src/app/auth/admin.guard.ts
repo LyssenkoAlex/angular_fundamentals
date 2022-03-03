@@ -20,11 +20,14 @@ export class AdminGuard implements CanActivate {
   isAdmin : boolean = false
 
 
+  ngOnInit(): void {
+    this.userService.isAdmin$.subscribe(data => this.isAdmin = data)
+  }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    this.userService.isAdmin$.subscribe(data => this.isAdmin = data)
+    console.log('isAdmin: ' , this.isAdmin)
     return !this.isAdmin;
   }
 

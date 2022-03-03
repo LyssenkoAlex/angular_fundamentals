@@ -30,7 +30,7 @@
         <div class="form-group col">
           <label>Password</label>
           <input appPasswordToggle type="password" name="password" class="form-control" [(ngModel)]="model.password" #password="ngModel"
-                 [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6">
+                 [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" autocomplete="password">
           <i class="fa fa-key fa-lg"></i>
           <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
             <div *ngIf="password.errors?.['required']">Password is required</div>

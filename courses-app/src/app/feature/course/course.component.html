@@ -4,10 +4,16 @@
       [routerLink]="['/courses/', course?.id]">
       View: {{ course?.title }}
     </a>
-    <a
-      [routerLink]="['/courses/edit/', course?.id]">
-      Edit: {{ course?.title }}
-    </a>
+    <div *ngIf="isAdmin">
+      <a
+        [routerLink]="['/courses/edit/', course?.id]">
+        Edit: {{ course?.title }}
+      </a>
+      <a
+        [routerLink]="['/courses/remove/', course?.id]">
+        Remove: {{ course?.title }}
+      </a>
+    </div>
     <p>{{course?.description}}</p>
   </div>
   <div>

@@ -5,4 +5,5 @@ export interface CourseModel {
   duration: number;
   authors: string[];
   id: string;
+  selectedAuthor?:string
 }
