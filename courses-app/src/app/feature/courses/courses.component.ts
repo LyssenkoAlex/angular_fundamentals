@@ -1,9 +1,4 @@
 import {Component} from '@angular/core';
-import {Course} from "../../data/schema/Course";
-import data from '../../data/mock.json'
-import {AuthorsStoreService} from "../../services/authors-store.service";
-import {AuthorModel} from "../../models/Author";
-import {Actions} from "../../models/Actions";
 import {CourseModel} from "../../models/CourseModel";
 import {CoursesStoreService} from "../../services/courses-store.service";
 

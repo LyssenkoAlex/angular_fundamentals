@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {Course} from '../../data/schema/Course';
+import {Course} from '../../models/Course';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Output, EventEmitter } from '@angular/core';

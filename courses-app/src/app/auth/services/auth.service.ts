@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {UserModel} from "../../models/UserModel";
 import {Router} from "@angular/router";
 import {SessionStorageService} from "./session-storage.service";
+import {UserStoreService} from "../../user/user-service/user-store.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,9 @@ export class AuthService {
   public currentUser = this.currentUserSubject.asObservable()
 
 
-  constructor(private http: HttpClient, private router: Router, private sessionStorageService: SessionStorageService) {
+  constructor(private http: HttpClient, private router: Router, private sessionStorageService: SessionStorageService
+    , private userService: UserStoreService
+  ) {
   }
 
   public get currentUserValue() {
@@ -37,12 +40,18 @@ export class AuthService {
       this.currentUserSubject.next(data);
       this.isAuthorized$$.next(true)
       this.sessionStorageService.setToken("token", data.result)
+      this.userService.getUser()
+
+      if(this.userService.isAdmin$) {
+        this.router.navigate(['/courses']);
+      }
+
     } else {
       this.router.navigate(['/login']);
     }
   }
 
-  logout  ()  {
+  logout() {
     const token: string = this.sessionStorageService.getToken('token')
     const headers = {'Authorization': token};
     this.http.delete(this.API_LOGOUT, {headers}).subscribe((data) => {
@@ -50,9 +59,9 @@ export class AuthService {
     });
   }
 
-  register =  (model:UserModel) => {
+  register = (model: UserModel) => {
     this.http.post(this.API_REGISTER, model).subscribe((result) => {
-        console.log("result: ", result)
+      console.log("result: ", result)
     })
   }
 
