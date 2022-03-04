@@ -31,7 +31,7 @@ function nameValidate() : {[key: string]: any} | null {
       .match(
         /^[a-zA-Z0-9_.-]*$/
       )
-    console.log('nameValidate: ', forbidden)
+
     return forbidden === null ? { forbiddenName: { value: control.value } } : null;
   };
 }

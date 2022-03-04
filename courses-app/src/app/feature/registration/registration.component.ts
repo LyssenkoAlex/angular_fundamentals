@@ -18,7 +18,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   onSubmit() {
-    console.log('model: ', this.model)
+
     const user:UserModel = {name:this.model.lastName, email:this.model.email, password:this.model.password, role:''}
     this.authService.register(user)
   }

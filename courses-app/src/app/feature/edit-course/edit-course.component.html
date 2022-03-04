@@ -1,4 +1,4 @@
-<form #heroForm="ngForm">
+<form #heroForm="ngForm" (ngSubmit)="onFormSubmit()">
 
   <div class="form-group">
     <label for="name">Title</label>
@@ -14,8 +14,8 @@
   </div>
 
   <div class="form-group">
-    <label for="duration">Description</label>
-    <input type="text"  class="form-control" id="duration"
+    <label for="duration">Duration</label>
+    <input type="number"  class="form-control" id="duration"
            [(ngModel)]="model.duration" name="duration">
   </div>
 

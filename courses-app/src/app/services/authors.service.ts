@@ -21,7 +21,7 @@ export class AuthorsService {
   getAll = async () => {
 
     const data: any =  await this.httpClient.get(this.API_ALL_AUTHORS).toPromise();
-    console.log('getAll: ', data.result);
+
     this.setActionRunnerFn(Actions.RECEIVED_AUTHORS, data.result)
   }
 

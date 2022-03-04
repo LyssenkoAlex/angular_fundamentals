@@ -54,6 +54,9 @@ export class CoursesStoreService {
         console.log('processAction RECEIVED_COURSE', data);
         this.course$$.next(data)
         break;
+      case(action === Actions.EDIT_COURSE):
+        this.courseService.editCourse(data.course, data.id)
+
     }
   }
 }

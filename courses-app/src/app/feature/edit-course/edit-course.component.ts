@@ -26,23 +26,23 @@ export class EditCourseComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id']; // (+) converts string 'id' to a number
-      console.log('id: ', this.id)
+
       if (this.id) {
         this.store.processAction(Actions.COURSE_BY_ID, this.id)
         this.storeAuthor.processAction(Actions.ALL_AUTHORS, null)
 
         this.store.course$.subscribe((data) => {
-          console.log('data sub: ', data)
+
           if(data) {
             this.model = data
-            console.log('this.model: ', this.model)
+
             let date: Date = new Date(this.model.creationDate)
             let dateRes = date.toLocaleDateString("en-GB", { // you can use undefined as first argument
               year: "numeric",
               month: "2-digit",
               day: "2-digit",
             })
-            console.log('dateRes: ', dateRes)
+
 
             this.model.creationDate = `${dateRes.split('/')[2]}-${dateRes.split('/')[1]}-${dateRes.split('/')[0]}`
           }
@@ -56,4 +56,7 @@ export class EditCourseComponent implements OnInit {
     });
   }
 
+  onFormSubmit() {
+    this.store.processAction(Actions.EDIT_COURSE, {course:this.model, id:this.id})
+  }
 }
