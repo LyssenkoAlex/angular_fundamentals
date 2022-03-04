@@ -18,7 +18,6 @@ export class UserStoreService {
 
   getUser() {
     this.userService.getUser().then((res:any) => {
-      console.log("res U: ", res?.successful)
         const user:UserModel = res.result
         this.name$$.next(user.name)
         this.isAdmin$$.next(user.role === 'admin')

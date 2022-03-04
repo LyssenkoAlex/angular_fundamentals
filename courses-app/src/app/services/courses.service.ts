@@ -28,21 +28,16 @@ export class CoursesService {
 
   getAll = async () => {
     const data: any = await this.httpClient.get(this.API_ALL_COURSES).toPromise();
-    console.log('getAll: ', data.result);
     this.setActionRunnerFn(Actions.RECEIVED_COURSES, data.result)
   }
 
   addCourse = async (courseData:any) => {
-    console.log('courseData: ', courseData)
     const data: any = await this.httpClient.post(this.API_ADD_COURSES, courseData).toPromise();
-    console.log('add cpurse: ', data)
   }
 
   getById = async (id: string) => {
     const data: any = await this.httpClient.get(this.API_BY_ID_COURSES + id, ).toPromise();
     this.setActionRunnerFn(Actions.RECEIVED_COURSE_BY_ID, data.result)
-    console.log('getById: ', data.result);
-
   }
 
   public addAuthor() {
@@ -51,7 +46,6 @@ export class CoursesService {
 
   editCourse = async (data: CourseModel, id:string) => {
     const res: any = await this.httpClient.put(this.API_EDIT_COURSES + id, data).toPromise();
-    console.log('edit course: ', res)
     this.router.navigate(['/courses']);
   }
 }

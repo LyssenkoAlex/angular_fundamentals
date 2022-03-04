@@ -8,15 +8,11 @@ import {CoursesStoreService} from "./services/courses-store.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   title = 'courses-app';
   verified: boolean = false;
 
-  constructor(private storeAuthors: AuthorsStoreService, private courseStore:CoursesStoreService) {
-  }
+  constructor() {}
 
-  ngOnInit() {
-    this.storeAuthors.processAction(Actions.INIT_AUTHORS, null)
-    this.courseStore.processAction(Actions.INIT_COURSES, null)
-  }
+
 }

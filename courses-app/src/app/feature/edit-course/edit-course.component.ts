@@ -20,16 +20,16 @@ export class EditCourseComponent implements OnInit {
   model: CourseModel = {authors: [], creationDate: "", description: "", duration: 0, id: "", title: '', selectedAuthor:''};
 
 
+
   constructor(private route: ActivatedRoute, private store: CoursesStoreService, private storeAuthor:AuthorsStoreService) {
   }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.id = params['id']; // (+) converts string 'id' to a number
+      this.id = params['id'];
 
       if (this.id) {
         this.store.processAction(Actions.COURSE_BY_ID, this.id)
-        this.storeAuthor.processAction(Actions.ALL_AUTHORS, null)
 
         this.store.course$.subscribe((data) => {
 
@@ -43,15 +43,17 @@ export class EditCourseComponent implements OnInit {
               day: "2-digit",
             })
 
-
             this.model.creationDate = `${dateRes.split('/')[2]}-${dateRes.split('/')[1]}-${dateRes.split('/')[0]}`
+
+            this.storeAuthor.authors$.subscribe((data) => {
+              console.log("storeAuthor: ", data)
+              this.model.selectedAuthor = data.filter((item) => item.id === this.model.authors[0])[0]?.name
+              this.authors = data
+            })
           }
         })
 
-        this.storeAuthor.authors$.subscribe((data) => {
-          this.model.selectedAuthor = data.filter((item) => item.id === this.model.authors[0])[0]?.name
-          this.authors = data
-        })
+
       }
     });
   }

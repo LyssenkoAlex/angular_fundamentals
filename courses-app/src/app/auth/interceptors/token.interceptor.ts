@@ -17,7 +17,7 @@ export class TokenInterceptorService implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token: string | null = this.sessionService.getToken('token');
-    console.log("token: ", token)
+
     if (token) {
       request = request.clone({ headers: request.headers.set('Authorization', token) });
       const headers = new HttpHeaders().set('Authorization', token);
