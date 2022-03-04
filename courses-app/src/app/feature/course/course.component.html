@@ -9,8 +9,9 @@
         [routerLink]="['/courses/edit/', course?.id]">
         Edit: {{ course?.title }}
       </a>
+      <div>
       <button type=button class="btn btn-primary"  (click)="clickMethod(course?.id)">Delete me</button>
-
+      </div>
     </div>
     <p>{{course?.description}}</p>
   </div>
