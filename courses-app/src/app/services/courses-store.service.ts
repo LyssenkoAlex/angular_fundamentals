@@ -56,6 +56,10 @@ export class CoursesStoreService {
         break;
       case(action === Actions.EDIT_COURSE):
         this.courseService.editCourse(data.course, data.id)
+        break;
+      case(action === Actions.DELETE_COURSE):
+        this.courseService.deleteCourse(data)
+        break;
 
     }
   }

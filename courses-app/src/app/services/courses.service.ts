@@ -14,6 +14,7 @@ export class CoursesService {
   private API_ALL_COURSES = "http://localhost:3000/courses/all";
   private API_ADD_COURSES = "http://localhost:3000/courses/add";
   private API_EDIT_COURSES = "http://localhost:3000/courses/";
+  private API_DELETE_COURSES = "http://localhost:3000/courses/";
   private API_BY_ID_COURSES = "http://localhost:3000/courses/";
   private API_FILTER_COURSES = "http://localhost:3000/courses/filter";
 
@@ -46,6 +47,11 @@ export class CoursesService {
 
   editCourse = async (data: CourseModel, id:string) => {
     const res: any = await this.httpClient.put(this.API_EDIT_COURSES + id, data).toPromise();
+    this.router.navigate(['/courses']);
+  }
+
+  deleteCourse = async(id:string) => {
+    const res: any = await this.httpClient.delete(this.API_DELETE_COURSES + id).toPromise();
     this.router.navigate(['/courses']);
   }
 }
