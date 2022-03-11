@@ -4,7 +4,9 @@
   LOADING
 </div>
 
-<div *ngFor="let author of authors">
-  <p>Name: {{author.name}}</p>
-</div>
 
+<ul>
+  <li *ngFor="let item of authors$ | async">
+    {{ item.id }}  {{ item.name }}
+  </li>
+</ul>

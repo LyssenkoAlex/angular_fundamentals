@@ -46,7 +46,7 @@ import {EditCourseResolverResolver} from "../resolvers/edit-course-resolver.reso
       {
         path: 'authors',
         loadChildren: () => import('../feature/authors/authors.module').then(m => m.AuthorsModule),
-        resolve: {preFetchData: AuthorsResolverResolver}
+        // resolve: {preFetchData: AuthorsResolverResolver}
       },
       {path: '**', redirectTo: 'login'}
     ])

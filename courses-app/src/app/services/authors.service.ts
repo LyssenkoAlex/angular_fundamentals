@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Actions} from "../models/Actions";
+import {UserModel} from "../models/UserModel";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +21,13 @@ export class AuthorsService {
   }
 
   getAll = async () => {
-
     const data: any =  await this.httpClient.get(this.API_ALL_AUTHORS).toPromise();
-
     this.setActionRunnerFn(Actions.RECEIVED_AUTHORS, data.result)
+  }
+
+  getAuthorOb(): Observable<any>{
+    console.log("getAuthorOb")
+    return this.httpClient.get(this.API_ALL_AUTHORS)
   }
 
   public addAuthor(){

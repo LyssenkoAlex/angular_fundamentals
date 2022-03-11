@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {LoginComponent} from './feature/login/login.component';
 import {RegistrationComponent} from './feature/registration/registration.component';
@@ -23,6 +22,12 @@ import {EditCourseComponent} from './feature/edit-course/edit-course.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AuthorsComponent } from './feature/authors/authors.component';
 import {TokenInterceptorService} from "./auth/interceptors/token.interceptor";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {StoreModule} from "@ngrx/store";
+import {AuthorEffects} from "./store/authors/author.effect";
+import {EffectsModule} from "@ngrx/effects";
+import {reducer, initialState as authorInitialState} from "./store/authors/author.reducer";
+import {AuthorsFacadeService} from "./store/authors/authors-facade.service";
 
 
 @NgModule({
@@ -54,13 +59,20 @@ import {TokenInterceptorService} from "./auth/interceptors/token.interceptor";
     ReactiveFormsModule,
     SharedModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducer),
+    StoreModule.forFeature('authors', reducer, {
+      initialState: authorInitialState
+    }),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([AuthorEffects]),
+    StoreDevtoolsModule.instrument({})
   ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  },],
+  },[AuthorsFacadeService]],
   bootstrap: [AppComponent]
 })
 export class AppModule {

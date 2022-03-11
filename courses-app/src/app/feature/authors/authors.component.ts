@@ -1,24 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthorsStoreService} from "../../services/authors-store.service";
+import { Component } from '@angular/core';
 import {AuthorModel} from "../../models/Author";
-import {Actions} from "../../models/Actions";
-import {Subscription} from "rxjs";
+import {AuthorsFacadeService} from "../../store/authors/authors-facade.service";
 
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.css']
 })
-export class AuthorsComponent  implements OnInit {
+export class AuthorsComponent   {
 
   authors: AuthorModel[] | undefined
   isLoading: boolean  = true
+  authors$ = this.store.authors$
 
-  constructor(private store:AuthorsStoreService) {}
-
-  ngOnInit() {
-    this.store.authors$.subscribe(data => this.authors = data)
-    this.store.isLoading$.subscribe(data => this.isLoading = data)
+  constructor(private store:AuthorsFacadeService) {
+    this.store.getAll()
   }
 
 

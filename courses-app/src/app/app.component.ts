@@ -1,7 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthorsStoreService} from "./services/authors-store.service";
-import {Actions} from "./models/Actions";
-import {CoursesStoreService} from "./services/courses-store.service";
+import {Component} from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
