@@ -27,7 +27,7 @@ import {StoreModule} from "@ngrx/store";
 import {AuthorEffects} from "./store/authors/author.effect";
 import {EffectsModule} from "@ngrx/effects";
 import {reducer, initialState as authorInitialState} from "./store/authors/author.reducer";
-import {AuthorsFacadeService} from "./store/authors/authors-facade.service";
+import {AuthorsFacade} from "./store/authors/authors.facade";
 
 
 @NgModule({
@@ -72,7 +72,7 @@ import {AuthorsFacadeService} from "./store/authors/authors-facade.service";
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  },[AuthorsFacadeService]],
+  },[AuthorsFacade]],
   bootstrap: [AppComponent]
 })
 export class AppModule {

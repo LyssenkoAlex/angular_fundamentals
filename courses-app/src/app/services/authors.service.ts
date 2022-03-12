@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Actions} from "../models/Actions";
 import {UserModel} from "../models/UserModel";
 import {Observable} from "rxjs";
+import {AuthorModel} from "../models/Author";
+import {AuthorState} from "../store/authors/author.reducer";
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +27,14 @@ export class AuthorsService {
     this.setActionRunnerFn(Actions.RECEIVED_AUTHORS, data.result)
   }
 
-  getAuthorOb(): Observable<any>{
+  getAuthorOb(): Observable<AuthorModel[]>{
     console.log("getAuthorOb")
-    return this.httpClient.get(this.API_ALL_AUTHORS)
+    return this.httpClient.get<AuthorModel[]>(this.API_ALL_AUTHORS)
+  }
+
+  addAuthorOb(author:AuthorModel): Observable<any>{
+    console.log("addAuthorOb service: ", author)
+    return this.httpClient.post(this.API_ADD_AUTHORS, author);
   }
 
   public addAuthor(){

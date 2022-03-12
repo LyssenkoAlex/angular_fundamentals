@@ -10,3 +10,23 @@
     {{ item.id }}  {{ item.name }}
   </li>
 </ul>
+
+
+
+<div class="card-body">
+  <form name="form" [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <div class="form-row">
+      <div class="form-group col">
+        <label>Author name</label>
+        <input type="text" formControlName="name" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && name?.errors }"/>
+        <div *ngIf="submitted || name?.touched || name?.dirty || name?.errors" class="invalid-feedback">
+          <div *ngIf="name?.touched || name?.dirty || name?.errors?.['required']">Name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary mr-1">Add author</button>
+    </div>
+  </form>
+</div>
