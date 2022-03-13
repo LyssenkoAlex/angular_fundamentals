@@ -27,31 +27,25 @@ export class CoursesStoreService {
   processAction = async (action: string, data: any) => {
     switch (true) {
       case (action === Actions.INIT_COURSES):
-        console.log('processAction INIT_COURSE');
         this.courseService.triggerActionRunner()
         break;
       case(action === Actions.ALL_COURSES):
-        console.log('processAction ALL_COURSES');
         this.isLoading$$.next(true);
         this.courseService.getAll()
         break;
 
       case(action === Actions.RECEIVED_COURSES):
-        console.log('processAction RECEIVED_COURSE', data);
         this.courses$$.next(data)
         this.isLoading$$.next(false);
         break;
 
       case(action === Actions.ADD_COURSES):
-        console.log('add course', data);
         this.courseService.addCourse(data)
         break;
       case (action === Actions.COURSE_BY_ID):
-        console.log('add course', data);
         this.courseService.getById(data)
         break;
       case(action === Actions.RECEIVED_COURSE_BY_ID):
-        console.log('processAction RECEIVED_COURSE', data);
         this.course$$.next(data)
         break;
       case(action === Actions.EDIT_COURSE):

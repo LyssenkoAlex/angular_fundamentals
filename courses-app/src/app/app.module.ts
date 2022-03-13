@@ -26,8 +26,9 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {StoreModule} from "@ngrx/store";
 import {AuthorEffects} from "./store/authors/author.effect";
 import {EffectsModule} from "@ngrx/effects";
-import {reducer, initialState as authorInitialState} from "./store/authors/author.reducer";
+import {reducer, initialState as authorInitialState, addActionReducer} from "./store/authors/author.reducer";
 import {AuthorsFacade} from "./store/authors/authors.facade";
+import {initialStateAddModel} from "./models/Author";
 
 
 @NgModule({
@@ -61,8 +62,12 @@ import {AuthorsFacade} from "./store/authors/authors.facade";
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(reducer),
+    StoreModule.forRoot(addActionReducer),
     StoreModule.forFeature('authors', reducer, {
       initialState: authorInitialState
+    }),
+    StoreModule.forFeature('add-author', addActionReducer, {
+      initialState: initialStateAddModel
     }),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([AuthorEffects]),

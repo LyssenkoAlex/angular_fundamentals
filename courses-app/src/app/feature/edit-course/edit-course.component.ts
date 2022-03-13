@@ -46,7 +46,6 @@ export class EditCourseComponent implements OnInit {
             this.model.creationDate = `${dateRes.split('/')[2]}-${dateRes.split('/')[1]}-${dateRes.split('/')[0]}`
 
             this.storeAuthor.authors$.subscribe((data) => {
-              console.log("storeAuthor: ", data)
               this.model.selectedAuthor = data.filter((item) => item.id === this.model.authors[0])[0]?.name
               this.authors = data
             })

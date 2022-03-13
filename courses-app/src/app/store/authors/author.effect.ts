@@ -8,14 +8,13 @@ import {
   RequestAuthorsFail,
   RequestAuthorsSuccess
 } from "./author.action";
-import {AuthorModel, AuthorModelAddASuccess} from "../../models/Author";
+import {AuthorModel, AuthorModelAdd} from "../../models/Author";
 
 
 @Injectable()
 export class AuthorEffects {
 
   constructor(private actions$: Actions, private authorService: AuthorsService) {
-    console.log("AuthorEffects constructor")
   }
 
   getAuthors$ = createEffect(() => {
@@ -35,11 +34,11 @@ export class AuthorEffects {
     return this.actions$.pipe(
       ofType(AuthorsApiActionTypes.RequestAddAuthor),
       switchMap((action:any) => this.authorService.addAuthorOb(action.payload).pipe(
-          map((result:AuthorModelAddASuccess) => {
-            console.log("Effect addAuthor$: ", result);
+          map((result:AuthorModelAdd) => {
+            console.log("RequestAddAuthor: ", result)
             return new RequestAddAuthorSuccess(result);
           }),
-          catchError(error => of(new RequestAddAuthorFail()))
+          catchError(error => of(new RequestAddAuthorFail(error)))
         )
       )
     );});

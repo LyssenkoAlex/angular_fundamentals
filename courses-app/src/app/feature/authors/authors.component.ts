@@ -1,28 +1,38 @@
-import {Component} from '@angular/core';
-import {AuthorModel} from "../../models/Author";
+import {Component, OnInit} from '@angular/core';
 import {AuthorsFacade} from "../../store/authors/authors.facade";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Actions} from "../../models/Actions";
+import {AuthorModel} from "../../models/Author";
+import {AuthorState} from "../../store/authors/author.reducer";
 
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',
   styleUrls: ['./authors.component.css']
 })
-export class AuthorsComponent {
+export class AuthorsComponent implements OnInit{
 
-  authors: AuthorModel[] | undefined
-  isLoading: boolean = true
-  authors$ = this.store.authors$
   form: FormGroup;
   submitted = false
+  authors:AuthorModel[] = []
+  addResult:boolean = false
+
 
   constructor(private store: AuthorsFacade, private fb: FormBuilder,) {
-    this.store.getAll();
     this.form = fb.group({
       name: [
         "", [Validators.required]
       ]
+    })
+  }
+
+  ngOnInit() {
+    this.store.getAll();
+    this.store.getAllAuthorsResult$.subscribe((resp:AuthorState) => {
+      this.authors = resp.result.authors
+    })
+    this.store.getAddAuthorResult$.subscribe((result) => {
+      console.log("****getAddAuthorResult$: ", result)
+      this.addResult = result.successful
     })
   }
 
@@ -36,9 +46,8 @@ export class AuthorsComponent {
     if (this.form.invalid) {
       return;
     }
-
     this.store.addAuthor(this.form.value)
-
+    this.store.getAll();
   }
 
 }

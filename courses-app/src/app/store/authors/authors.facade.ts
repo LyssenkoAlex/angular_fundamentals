@@ -3,7 +3,8 @@ import {Store} from '@ngrx/store'
 import {AuthorState} from "./author.reducer";
 import {authorsQuery} from "./authors.selectors";
 import {RequestAddAuthor, RequestAuthors} from "./author.action";
-import {AuthorModel} from "../../models/Author";
+import {AuthorModel, AuthorModelAdd} from "../../models/Author";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,13 @@ import {AuthorModel} from "../../models/Author";
 
 export class AuthorsFacade {
   loaded$ = this.store.select(authorsQuery.getRequestAuthors)
-  authors$ = this.store.select(authorsQuery.getRequestAuthorsSuccess)
+  getAllAuthorsResult$:Observable<AuthorState> = this.store.select(authorsQuery.getRequestAuthorsSuccess)
+  getAddAuthorResult$:Observable<AuthorModelAdd> = this.store.select(authorsQuery.getAddAuthorsSuccess)
 
-  constructor(private store:Store<AuthorState>) {
-    console.log("AuthorsFacade constructor")
-  }
+
+  constructor(private store:Store<AuthorState>) {}
 
   getAll(){
-    console.log('AuthorsFacade getAll')
     this.store.dispatch(new RequestAuthors())
   }
 

@@ -1,13 +1,12 @@
 
 
-<div *ngIf="isLoading">
+<div>
   LOADING
 </div>
 
-
 <ul>
-  <li *ngFor="let item of authors$ | async">
-    {{ item.id }}  {{ item.name }}
+  <li *ngFor="let item of authors">
+    {{ item.id }}  {{ item?.name }}
   </li>
 </ul>
 
@@ -27,6 +26,9 @@
     </div>
     <div class="text-center">
       <button class="btn btn-primary mr-1">Add author</button>
+    </div>
+    <div *ngIf="addResult">
+      Author was added
     </div>
   </form>
 </div>

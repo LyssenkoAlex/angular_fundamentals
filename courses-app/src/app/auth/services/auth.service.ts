@@ -33,7 +33,6 @@ export class AuthService {
 
 
   login = async (email: string, password: string) => {
-    console.log('as : ', email, ' pass: ', password)
 
     const data: any = await this.http.post(this.API_LOGIN, {email, password}).toPromise();
     if (data.successful) {
@@ -55,13 +54,11 @@ export class AuthService {
     const token: string = this.sessionStorageService.getToken('token')
     const headers = {'Authorization': token};
     this.http.delete(this.API_LOGOUT, {headers}).subscribe((data) => {
-      console.log('logout: ', data)
     });
   }
 
   register = (model: UserModel) => {
     this.http.post(this.API_REGISTER, model).subscribe((result) => {
-      console.log("result: ", result)
     })
   }
 

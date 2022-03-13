@@ -1,18 +1,30 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {AuthorState} from "./author.reducer";
+import {AuthorState, initialState} from "./author.reducer";
+import {AuthorModelAdd, initialStateAddModel} from "../../models/Author";
+
 
 
 const getAuthorsState = createFeatureSelector<AuthorState>('authors');
-
 const getRequestAuthors = createSelector(getAuthorsState, (state:AuthorState) => state.loading)
-const getRequestAuthorsSuccess = createSelector(getAuthorsState, getRequestAuthors, (state:any, isLoaded) => {
-  console.log("selector getRequestAuthorsSuccess: ", state)
-    return isLoaded ? state.authors.result : []
+const getRequestAuthorsSuccess = createSelector(getAuthorsState, getRequestAuthors, (state:AuthorState, isLoaded) => {
+    return isLoaded ? state : initialState
 })
 const getRequestAuthorsFail = createSelector(getAuthorsState, (state:AuthorState) => state.error);
+
+
+const getAddAuthorState = createFeatureSelector<AuthorModelAdd>('add-author')
+const getAddAuthors = createSelector(getAddAuthorState, (state) => state.sendRequest)
+const getAddAuthorsSuccess = createSelector(getAddAuthorState, getAddAuthors, (state:AuthorModelAdd, sendRequest) => {
+  console.log("selector getAddAuthorsSuccess: ", state)
+  return sendRequest ? state : initialStateAddModel
+})
+const getAddAuthorFail = createSelector(getAddAuthorState, (state:AuthorModelAdd) => state.error)
 
 export const authorsQuery = {
   getRequestAuthors,
   getRequestAuthorsSuccess,
-  getRequestAuthorsFail
+  getRequestAuthorsFail,
+  getAddAuthors,
+  getAddAuthorsSuccess,
+  getAddAuthorFail
 }

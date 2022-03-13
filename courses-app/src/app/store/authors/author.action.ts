@@ -1,5 +1,6 @@
 import {Action} from "@ngrx/store";
-import {AuthorModel, AuthorModelAddASuccess} from "../../models/Author";
+import {AuthorModel, AuthorModelAdd} from "../../models/Author";
+import {AuthorState} from "./author.reducer";
 
 export enum AuthorsApiActionTypes {
   RequestAuthors = 'requestAuthors',
@@ -18,8 +19,7 @@ export class RequestAuthors implements Action {
 export class RequestAuthorsSuccess implements Action {
   readonly type = AuthorsApiActionTypes.RequestAuthorsSuccess
 
-  constructor(public payload: AuthorModel[]) {
-    console.log("RequestAuthorsSuccess constructor", payload)
+  constructor(public payload: AuthorState) {
   }
 }
 
@@ -32,19 +32,17 @@ export class RequestAuthorsFail implements Action {
 
 export class RequestAddAuthor implements Action {
   constructor(public payload: AuthorModel) {
-    console.log("RequestAddAuthor constructor", payload)
   }
   readonly type = AuthorsApiActionTypes.RequestAddAuthor
 }
 
 export class RequestAddAuthorSuccess implements Action {
-  constructor(public payload: AuthorModelAddASuccess) {
-    console.log("RequestAddAuthor constructor", payload)
-  }
+  constructor(public payload: AuthorModelAdd) {}
   readonly type = AuthorsApiActionTypes.RequestAddAuthorSuccess
 }
 
 export class RequestAddAuthorFail implements Action {
+  constructor(public payload:any) {}
   readonly type = AuthorsApiActionTypes.RequestAddAuthorFail
 }
 

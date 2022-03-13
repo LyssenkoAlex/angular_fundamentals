@@ -20,7 +20,6 @@ export class CoursesComponent {
   constructor(private store:CoursesStoreService) {}
 
   ngOnInit() {
-    console.log("init courses")
     this.store.courses$.subscribe(data => this.courses = data)
     this.store.isLoading$.subscribe(data => this.isLoading = data)
   }
@@ -32,7 +31,6 @@ export class CoursesComponent {
 
 
   onSubmit($event: any) {
-   console.log("event: ", $event)
   }
 
 }

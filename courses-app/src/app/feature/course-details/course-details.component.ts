@@ -23,13 +23,11 @@ export class CourseDetailsComponent implements OnInit {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
-      console.log("CourseDetailsComponent: ", this.id)
       if (this.id) {
         this.store.processAction(Actions.COURSE_BY_ID, this.id)
         this.store.course$.subscribe((data) => {
           if(data) {
             this.course = data
-            console.log("CourseDetailsComponent: ", data)
             let date: Date = new Date(this.course.creationDate)
             let dateRes = date.toLocaleDateString("en-GB", { // you can use undefined as first argument
               year: "numeric",
@@ -39,7 +37,6 @@ export class CourseDetailsComponent implements OnInit {
             this.course.creationDate = `${dateRes.split('/')[2]}-${dateRes.split('/')[1]}-${dateRes.split('/')[0]}`
 
             this.storeAuthor.authors$.subscribe((data) => {
-              console.log("storeAuthor: ", data)
               if(this.course) {
                 this.course.selectedAuthor = data.filter((item) => item.id === this.course?.authors[0])[0]?.name
               }

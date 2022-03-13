@@ -1,21 +1,24 @@
-import {AuthorModel} from "../../models/Author";
-import {AuthorActions, AuthorsApiActionTypes} from "./author.action";
+import {AuthorModel, AuthorModelAdd, initialStateAddModel} from "../../models/Author";
+import {AuthorsApiActionTypes} from "./author.action";
+
 
 export interface AuthorState {
   loading: boolean;
-  authors: AuthorModel[],
-  error?:any,
+  result: {successful:boolean, authors: AuthorModel[] },
+  error:any,
 }
 
 export const initialState: AuthorState = {
   loading: false,
-  authors: []
+  result: {successful:false, authors:[]},
+  error:'',
 }
 
 export function reducer(
   state:AuthorState = initialState,
-  action: AuthorActions
+  action: any
 ): AuthorState {
+
   switch (action.type) {
     case AuthorsApiActionTypes.RequestAuthors: {
       return {
@@ -27,18 +30,48 @@ export function reducer(
       return {
         ...state,
         loading: true,
-        authors: action.payload
+        result: {successful: action.payload.successful, authors:action.payload.result},
       }
     }
     case AuthorsApiActionTypes.RequestAuthorsFail: {
       return {
         ...state,
         loading: false,
-        authors: action.payload
+        result: {successful: action.payload.successful, authors:action.payload.result},
       }
     }
     default: {
       return state
     }
   }
+}
+
+export function addActionReducer(state:AuthorModelAdd = initialStateAddModel, action:any):AuthorModelAdd {
+  console.log("addActionReducer: ", action)
+  switch (action.type) {
+    case AuthorsApiActionTypes.RequestAddAuthor: {
+      return {
+        ...state,
+        sendRequest: true
+      }
+    }
+    case AuthorsApiActionTypes.RequestAddAuthorSuccess: {
+      return {
+        ...state,
+        successful:action.payload.successful,
+        result: {id: action.payload.result.id, name:action.payload.result.name},
+      }
+    }
+    case AuthorsApiActionTypes.RequestAddAuthorFail: {
+      return {
+        ...state,
+        sendRequest: false,
+      }
+    }
+    default: {
+      return state
+    }
+  }
+
+
 }

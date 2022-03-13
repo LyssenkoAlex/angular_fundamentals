@@ -35,7 +35,6 @@ export class CourseComponent implements OnInit {
 
   clickMethod(id: string|undefined) {
     if(confirm("Are you sure to delete course")) {
-      console.log("Implement delete functionality here");
       this.store.processAction(Actions.DELETE_COURSE, id)
     }
     else {

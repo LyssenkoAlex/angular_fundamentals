@@ -23,17 +23,14 @@ export class AuthorsStoreService {
   processAction = async (action: string, data: any) => {
     switch (true) {
       case (action === Actions.INIT_AUTHORS):
-        console.log('processAction INIT_AUTHORS');
         this.authorService.triggerActionRunner()
         break;
       case(action === Actions.ALL_AUTHORS):
-        console.log('processAction ALL_AUTHORS');
         this.isLoading$$.next(true);
         this.authorService.getAll()
         break;
 
       case(action === Actions.RECEIVED_AUTHORS):
-        console.log('processAction RECEIVED_AUTHORS', data);
         this.authors$$.next(data)
         this.isLoading$$.next(false);
         break;
