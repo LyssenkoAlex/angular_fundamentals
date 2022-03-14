@@ -27,8 +27,10 @@
     <div class="text-center">
       <button class="btn btn-primary mr-1">Add author</button>
     </div>
-    <div *ngIf="addResult">
-      Author was added
+    <div *ngIf="addResult?.successful">
+      <h5>Author was added</h5>
+      <p>name: {{addResult?.result?.name}}</p>
+      <p>id: {{addResult?.result?.id}}</p>
     </div>
   </form>
 </div>

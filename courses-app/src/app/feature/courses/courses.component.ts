@@ -1,36 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CourseModel} from "../../models/CourseModel";
 import {CoursesStoreService} from "../../services/courses-store.service";
+import {CoursesFacade} from "../../store/courses/courses.facade";
+import {CoursesState} from "../../models/Course";
 
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrls: ['./courses.component.css']
 })
-export class CoursesComponent {
-  public foods: Object | undefined;
-  searchValue: string = '';
-  condition: boolean = false;
-  items: [string] = [''];
-  search: string = ''
+export class CoursesComponent implements OnInit {
 
-  courses: CourseModel[] | undefined
-  isLoading: boolean  = true
+  courses: CourseModel[] = []
 
-  constructor(private store:CoursesStoreService) {}
+
+  constructor(private store:CoursesFacade) {}
 
   ngOnInit() {
-    this.store.courses$.subscribe(data => this.courses = data)
-    this.store.isLoading$.subscribe(data => this.isLoading = data)
-  }
-
-
-  addItem(newItem: string) {
-    this.items?.push(newItem);
-  }
-
-
-  onSubmit($event: any) {
+    this.store.getAll()
+    this.store.getAllCoursesResult$.subscribe((res:CoursesState) => {
+      this.courses = res.result.courses
+    })
   }
 
 }

@@ -4,6 +4,9 @@ import {Actions} from "../models/Actions";
 import {CourseModel} from "../models/CourseModel";
 import {Router} from "@angular/router";
 import {CoursesStoreService} from "./courses-store.service";
+import {Observable} from "rxjs";
+import {AuthorState} from "../models/Author";
+import {CoursesState} from "../models/Course";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +33,14 @@ export class CoursesService {
   getAll = async () => {
     const data: any = await this.httpClient.get(this.API_ALL_COURSES).toPromise();
     this.setActionRunnerFn(Actions.RECEIVED_COURSES, data.result)
+  }
+
+  getCourses(): Observable<CoursesState>{
+    return this.httpClient.get<CoursesState>(this.API_ALL_COURSES)
+  }
+
+  addCourseObj(courseData:CourseModel): Observable<any>{
+    return this.httpClient.post<CoursesState>(this.API_ADD_COURSES, courseData)
   }
 
   addCourse = async (courseData:any) => {

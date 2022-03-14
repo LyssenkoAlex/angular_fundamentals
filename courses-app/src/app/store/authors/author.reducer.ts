@@ -1,18 +1,6 @@
-import {AuthorModel, AuthorModelAdd, initialStateAddModel} from "../../models/Author";
+import {AuthorModelAdd, AuthorState, initialState, initialStateAddModel} from "../../models/Author";
 import {AuthorsApiActionTypes} from "./author.action";
 
-
-export interface AuthorState {
-  loading: boolean;
-  result: {successful:boolean, authors: AuthorModel[] },
-  error:any,
-}
-
-export const initialState: AuthorState = {
-  loading: false,
-  result: {successful:false, authors:[]},
-  error:'',
-}
 
 export function reducer(
   state:AuthorState = initialState,
@@ -72,6 +60,4 @@ export function addActionReducer(state:AuthorModelAdd = initialStateAddModel, ac
       return state
     }
   }
-
-
 }

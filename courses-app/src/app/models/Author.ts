@@ -1,4 +1,3 @@
-import {AuthorState} from "../store/authors/author.reducer";
 
 
 export interface AuthorModel {
@@ -23,4 +22,16 @@ export const initialStateAddModel: AuthorModelAdd = {
     "name": "",
     "id": ""
   }
+}
+
+export interface AuthorState {
+  loading: boolean;
+  result: { successful: boolean, authors: AuthorModel[] },
+  error: any,
+}
+
+export const initialState: AuthorState = {
+  loading: false,
+  result: {successful: false, authors: []},
+  error: '',
 }

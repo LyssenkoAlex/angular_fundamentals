@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthorsFacade} from "../../store/authors/authors.facade";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthorModel} from "../../models/Author";
-import {AuthorState} from "../../store/authors/author.reducer";
+import {AuthorModel, AuthorModelAdd, AuthorState} from "../../models/Author";
 
 @Component({
   selector: 'app-authors',
@@ -14,7 +13,7 @@ export class AuthorsComponent implements OnInit{
   form: FormGroup;
   submitted = false
   authors:AuthorModel[] = []
-  addResult:boolean = false
+  addResult?:AuthorModelAdd
 
 
   constructor(private store: AuthorsFacade, private fb: FormBuilder,) {
@@ -25,14 +24,14 @@ export class AuthorsComponent implements OnInit{
     })
   }
 
-  ngOnInit() {
+  ngOnInit():void {
     this.store.getAll();
     this.store.getAllAuthorsResult$.subscribe((resp:AuthorState) => {
       this.authors = resp.result.authors
     })
     this.store.getAddAuthorResult$.subscribe((result) => {
       console.log("****getAddAuthorResult$: ", result)
-      this.addResult = result.successful
+      this.addResult = result
     })
   }
 

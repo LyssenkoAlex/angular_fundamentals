@@ -1,6 +1,5 @@
 import {Action} from "@ngrx/store";
-import {AuthorModel, AuthorModelAdd} from "../../models/Author";
-import {AuthorState} from "./author.reducer";
+import {AuthorModel, AuthorModelAdd, AuthorState} from "../../models/Author";
 
 export enum AuthorsApiActionTypes {
   RequestAuthors = 'requestAuthors',
@@ -45,12 +44,3 @@ export class RequestAddAuthorFail implements Action {
   constructor(public payload:any) {}
   readonly type = AuthorsApiActionTypes.RequestAddAuthorFail
 }
-
-export type AuthorActions =
-  RequestAuthors
-  | RequestAuthorsSuccess
-  | RequestAuthorsFail
-  | RequestAddAuthor
-  | RequestAddAuthorSuccess
-  | RequestAddAuthorFail
-

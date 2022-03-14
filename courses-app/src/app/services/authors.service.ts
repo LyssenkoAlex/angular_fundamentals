@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Actions} from "../models/Actions";
 import {Observable} from "rxjs";
-import {AuthorModel} from "../models/Author";
-import {AuthorState} from "../store/authors/author.reducer";
+import {AuthorModel, AuthorState} from "../models/Author";
 
 @Injectable({
   providedIn: 'root'

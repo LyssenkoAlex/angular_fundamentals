@@ -26,9 +26,12 @@ import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {StoreModule} from "@ngrx/store";
 import {AuthorEffects} from "./store/authors/author.effect";
 import {EffectsModule} from "@ngrx/effects";
-import {reducer, initialState as authorInitialState, addActionReducer} from "./store/authors/author.reducer";
+import {reducer, addActionReducer} from "./store/authors/author.reducer";
 import {AuthorsFacade} from "./store/authors/authors.facade";
-import {initialStateAddModel} from "./models/Author";
+import {initialState as authorInitialState, initialStateAddModel} from "./models/Author";
+import {addCourseReducer, coursesReducer} from "./store/courses/courses.reducer";
+import {initialCoursesState} from "./models/Course";
+import {CoursesEffects} from "./store/courses/courses.effect";
 
 
 @NgModule({
@@ -63,14 +66,22 @@ import {initialStateAddModel} from "./models/Author";
     HttpClientModule,
     StoreModule.forRoot(reducer),
     StoreModule.forRoot(addActionReducer),
+    StoreModule.forRoot(coursesReducer),
+    StoreModule.forRoot(addCourseReducer),
     StoreModule.forFeature('authors', reducer, {
       initialState: authorInitialState
     }),
     StoreModule.forFeature('add-author', addActionReducer, {
       initialState: initialStateAddModel
     }),
+    StoreModule.forFeature('courses', coursesReducer, {
+      initialState: initialCoursesState
+    }),
+    StoreModule.forFeature('add-course', addCourseReducer, {
+      initialState: initialStateAddModel
+    }),
     EffectsModule.forRoot([]),
-    EffectsModule.forFeature([AuthorEffects]),
+    EffectsModule.forFeature([CoursesEffects, AuthorEffects]),
     StoreDevtoolsModule.instrument({})
   ],
   providers: [ {

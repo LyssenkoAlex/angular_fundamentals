@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {AuthorState, initialState} from "./author.reducer";
-import {AuthorModelAdd, initialStateAddModel} from "../../models/Author";
+import {AuthorModelAdd, AuthorState, initialState, initialStateAddModel} from "../../models/Author";
 
 
 
@@ -15,7 +14,6 @@ const getRequestAuthorsFail = createSelector(getAuthorsState, (state:AuthorState
 const getAddAuthorState = createFeatureSelector<AuthorModelAdd>('add-author')
 const getAddAuthors = createSelector(getAddAuthorState, (state) => state.sendRequest)
 const getAddAuthorsSuccess = createSelector(getAddAuthorState, getAddAuthors, (state:AuthorModelAdd, sendRequest) => {
-  console.log("selector getAddAuthorsSuccess: ", state)
   return sendRequest ? state : initialStateAddModel
 })
 const getAddAuthorFail = createSelector(getAddAuthorState, (state:AuthorModelAdd) => state.error)

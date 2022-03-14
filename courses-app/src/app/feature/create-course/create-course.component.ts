@@ -5,8 +5,9 @@ import {
   FormGroup,
   Validators
 } from "@angular/forms";
-import {CoursesStoreService} from "../../services/courses-store.service";
-import {Actions} from "../../models/Actions";
+import {CoursesFacade} from "../../store/courses/courses.facade";
+import {CourseModelAdd} from "../../models/Course";
+import {Router} from "@angular/router";
 
 @Pipe({ name: 'durationConvert'})
 export class DurationConvert implements PipeTransform{
@@ -45,7 +46,8 @@ function nameValidate() : {[key: string]: any} | null {
 export class CreateCourseComponent implements OnInit {
   form: FormGroup;
   submitted = false;
-  constructor(private fb: FormBuilder, private store:CoursesStoreService) {
+  addResult:boolean = false
+  constructor(private fb: FormBuilder, private store:CoursesFacade, private router: Router) {
     this.form = fb.group({
       title:[
         "", [Validators.required]
@@ -66,6 +68,13 @@ export class CreateCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.getAddCourseResult$.subscribe((res:CourseModelAdd) => {
+      console.log("CourseModelAdd resp: ", res)
+      if(res.successful) {
+        this.router.navigate(['/courses'])
+        this.store.resetState()
+      }
+    })
   }
 
   get title() {
@@ -97,6 +106,6 @@ export class CreateCourseComponent implements OnInit {
       return;
     }
     this.form.value.authors = ['9b87e8b8-6ba5-40fc-a439-c4e30a373d36']
-    this.store.processAction(Actions.ADD_COURSES, this.form?.value)
+    this.store.addCourse(this.form?.value)
   }
 }

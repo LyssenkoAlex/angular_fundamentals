@@ -1,9 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Store} from '@ngrx/store'
-import {AuthorState} from "./author.reducer";
 import {authorsQuery} from "./authors.selectors";
 import {RequestAddAuthor, RequestAuthors} from "./author.action";
-import {AuthorModel, AuthorModelAdd} from "../../models/Author";
+import {AuthorModel, AuthorModelAdd, AuthorState} from "../../models/Author";
 import {Observable} from "rxjs";
 
 @Injectable({
