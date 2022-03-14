@@ -5,6 +5,8 @@ import {Actions} from "../../models/Actions";
 import {CourseModel} from "../../models/CourseModel";
 import {AuthorsStoreService} from "../../services/authors-store.service";
 import {AuthorModel} from "../../models/Author";
+import {CoursesFacade} from "../../store/courses/courses.facade";
+import {CourseModelRequest} from "../../models/Course";
 
 @Component({
   selector: 'app-edit-course',
@@ -13,15 +15,14 @@ import {AuthorModel} from "../../models/Author";
 })
 export class EditCourseComponent implements OnInit {
 
-  id: string | undefined;
+  id: string = "";
   private sub: any;
   authors: Array<AuthorModel> = []
-
-  model: CourseModel = {authors: [], creationDate: "", description: "", duration: 0, id: "", title: '', selectedAuthor:''};
-
+  course: CourseModel = {authors: [], creationDate: "", description: "", duration: 0, id: "", title: '', selectedAuthor:''};
 
 
-  constructor(private route: ActivatedRoute, private store: CoursesStoreService, private storeAuthor:AuthorsStoreService) {
+
+  constructor(private route: ActivatedRoute, private store: CoursesFacade, private storeAuthor:AuthorsStoreService) {
   }
 
   ngOnInit() {
@@ -29,27 +30,19 @@ export class EditCourseComponent implements OnInit {
       this.id = params['id'];
 
       if (this.id) {
-        this.store.processAction(Actions.COURSE_BY_ID, this.id)
+        this.store.getCourseById(this.id)
 
-        this.store.course$.subscribe((data) => {
+        this.store.getCourseByIdResult$.subscribe((res:CourseModelRequest) => {
+          console.log("CourseDetailsComponent resp: ", res)
+          Object.assign(this.course, res.course)
 
-          if(data) {
-            this.model = data
-
-            let date: Date = new Date(this.model.creationDate)
-            let dateRes = date.toLocaleDateString("en-GB", { // you can use undefined as first argument
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-            })
-
-            this.model.creationDate = `${dateRes.split('/')[2]}-${dateRes.split('/')[1]}-${dateRes.split('/')[0]}`
-
-            this.storeAuthor.authors$.subscribe((data) => {
-              this.model.selectedAuthor = data.filter((item) => item.id === this.model.authors[0])[0]?.name
-              this.authors = data
-            })
-          }
+          let date = new Date(this.course.creationDate)
+          let dateRes = date.toLocaleDateString("en-GB", { // you can use undefined as first argument
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })
+          this.course.creationDate = `${dateRes.split('/')[2]}-${dateRes.split('/')[1]}-${dateRes.split('/')[0]}`
         })
 
 
@@ -58,6 +51,9 @@ export class EditCourseComponent implements OnInit {
   }
 
   onFormSubmit() {
-    this.store.processAction(Actions.EDIT_COURSE, {course:this.model, id:this.id})
+    this.store.editCourse(this.course, this.id)
+    this.store.getEditCourseResult$.subscribe((res) => {
+      console.log("edit resut: ", res)
+    })
   }
 }

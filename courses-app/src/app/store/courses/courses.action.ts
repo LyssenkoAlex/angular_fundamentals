@@ -9,7 +9,13 @@ export enum CoursesApiActionTypes {
   RequestAddCourse = 'RequestAddCourse',
   RequestAddCourseSuccess = 'RequestAddCourseSuccess',
   RequestAddCoursesFail = 'RequestAddCoursesFail',
-  RequestAddCourseReSet = 'RequestAddCourseReSet'
+  RequestAddCourseReSet = 'RequestAddCourseReSet',
+  RequestCourseById = 'RequestCourseById',
+  RequestCourseByIdSuccess = 'RequestCourseByIdSuccess',
+  RequestCourseByIdFail = 'RequestCourseByIdFail',
+  RequestEditCourse = 'RequestEditCourse',
+  RequestEditCourseSuccess = 'RequestEditCourseSuccess',
+  RequestEditCourseFail = 'RequestEditCourseFail',
 
 }
 
@@ -52,3 +58,36 @@ export class RequestAddCourseReSet implements Action {
   readonly type = CoursesApiActionTypes.RequestAddCourseReSet
 
 }
+
+export class RequestCourseById implements Action {
+  constructor(public payload:string) {}
+  readonly type = CoursesApiActionTypes.RequestCourseById
+}
+
+export class RequestCourseByIdSuccess implements Action {
+  constructor(public payload:any) {}
+  readonly type = CoursesApiActionTypes.RequestCourseByIdSuccess
+}
+
+export class RequestCourseByIdFail implements Action {
+  constructor(public payload:any) {}
+  readonly type = CoursesApiActionTypes.RequestCourseByIdFail
+}
+
+
+export class RequestEditCourse implements Action {
+  constructor(public payload:any) {}
+  readonly type = CoursesApiActionTypes.RequestEditCourse
+}
+
+export class RequestEditCourseSuccess implements Action {
+  constructor(public payload:any) {}
+  readonly type = CoursesApiActionTypes.RequestEditCourseSuccess
+}
+
+export class RequestEditCourseFail implements Action {
+  constructor(public payload:any) {}
+  readonly type = CoursesApiActionTypes.RequestEditCourseFail
+}
+
+

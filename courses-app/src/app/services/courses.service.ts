@@ -43,6 +43,11 @@ export class CoursesService {
     return this.httpClient.post<CoursesState>(this.API_ADD_COURSES, courseData)
   }
 
+  getCourseObj(id: string): Observable<any>{
+    console.log("service: getCourseObj: ", id)
+    return this.httpClient.get<any>(this.API_BY_ID_COURSES + id)
+  }
+
   addCourse = async (courseData:any) => {
     const data: any = await this.httpClient.post(this.API_ADD_COURSES, courseData).toPromise();
   }
@@ -54,6 +59,11 @@ export class CoursesService {
 
   public addAuthor() {
     return this.httpClient.post(this.API_ADD_COURSES, {id: '56', courseTitle: 'ds'});
+  }
+
+  editCourseObj(data: CourseModel, id:string): Observable<any>{
+    console.log("service: getCourseObj: ", id)
+    return this.httpClient.put<any>(this.API_EDIT_COURSES + id, data)
   }
 
   editCourse = async (data: CourseModel, id:string) => {

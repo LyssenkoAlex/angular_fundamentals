@@ -5,9 +5,9 @@ import { of } from 'rxjs';
 import {CoursesService} from "../../services/courses.service";
 import {
   CoursesApiActionTypes, RequestAddCourseFail,
-  RequestAddCourseSuccess,
+  RequestAddCourseSuccess, RequestCourseByIdFail, RequestCourseByIdSuccess,
   RequestCoursesFail,
-  RequestCoursesSuccess
+  RequestCoursesSuccess, RequestEditCourse, RequestEditCourseFail, RequestEditCourseSuccess
 } from "./courses.action";
 import {CourseModel} from "../../models/CourseModel";
 
@@ -35,7 +35,7 @@ export class CoursesEffects {
       ofType(CoursesApiActionTypes.RequestAddCourse),
       switchMap((action:any) => this.courseService.addCourseObj(action.payload).pipe(
           map((result:CourseModel) => {
-            console.log("RequestAddCourse: ", result)
+            console.log("addCourseObj Effect: ", result)
             return new RequestAddCourseSuccess(result);
           }),
           catchError(error => of(new RequestAddCourseFail(error)))
@@ -43,6 +43,31 @@ export class CoursesEffects {
       )
     );});
 
+  getCourseById$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CoursesApiActionTypes.RequestCourseById),
+      switchMap((action:any) => this.courseService.getCourseObj(action.payload).pipe(
+          map((courses) => {
+            console.log("getCourseById$ Effect: ", courses.result);
+            return new RequestCourseByIdSuccess(courses.result);
+          }),
+          catchError(error => of(new RequestCourseByIdFail(error)))
+        )
+      )
+    );});
 
+  editCourse$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CoursesApiActionTypes.RequestEditCourse),
+      switchMap((action:any) => this.courseService.editCourseObj(action.payload.course, action.payload.id).pipe(
+          map((courses) => {
+            console.log("getCourseById$ Effect: ", courses.result);
+            console.log("getCourseById$ Effect action.payload: ", action.payload);
+            return new RequestEditCourseSuccess(courses.result);
+          }),
+          catchError(error => of(new RequestEditCourseFail(error)))
+        )
+      )
+    );});
 
 }

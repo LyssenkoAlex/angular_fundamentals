@@ -10,23 +10,25 @@ export interface Course {
 
 export interface CoursesState {
   loading: boolean;
-  result: { successful: boolean, courses: Course[] },
+  successful:boolean
+  result: {courses: Course[] },
   error?: any,
 }
 
 export const initialCoursesState: CoursesState = {
   loading: false,
-  result: { successful: false, courses: [] },
+  successful:false,
+  result: {  courses: [] },
 }
 
-export interface CourseModelAdd {
+export interface CourseModelRequest {
   sendRequest:boolean,
   successful: boolean;
   course:Course
   error?:any
 }
 
-export const initialStateAddModel: CourseModelAdd = {
+export const initialStateAddModel: CourseModelRequest = {
   sendRequest:false,
   successful: false,
   course: {title:"", description: "", id:"",authors:[], creationDate:"",duration:0 }

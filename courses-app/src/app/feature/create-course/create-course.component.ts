@@ -6,7 +6,7 @@ import {
   Validators
 } from "@angular/forms";
 import {CoursesFacade} from "../../store/courses/courses.facade";
-import {CourseModelAdd} from "../../models/Course";
+import {CourseModelRequest} from "../../models/Course";
 import {Router} from "@angular/router";
 
 @Pipe({ name: 'durationConvert'})
@@ -68,7 +68,7 @@ export class CreateCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.getAddCourseResult$.subscribe((res:CourseModelAdd) => {
+    this.store.getAddCourseResult$.subscribe((res:CourseModelRequest) => {
       console.log("CourseModelAdd resp: ", res)
       if(res.successful) {
         this.router.navigate(['/courses'])

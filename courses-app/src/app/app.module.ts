@@ -80,6 +80,11 @@ import {CoursesEffects} from "./store/courses/courses.effect";
     StoreModule.forFeature('add-course', addCourseReducer, {
       initialState: initialStateAddModel
     }),
+    StoreModule.forFeature('course-by-id', addCourseReducer, {
+      initialState: initialStateAddModel
+    }), StoreModule.forFeature('edit-coursed', addCourseReducer, {
+      initialState: initialStateAddModel
+    }),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([CoursesEffects, AuthorEffects]),
     StoreDevtoolsModule.instrument({})

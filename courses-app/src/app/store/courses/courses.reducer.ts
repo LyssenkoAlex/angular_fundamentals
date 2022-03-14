@@ -1,5 +1,4 @@
-
-import {CourseModelAdd, CoursesState, initialCoursesState, initialStateAddModel} from "../../models/Course";
+import {CourseModelRequest, CoursesState, initialCoursesState, initialStateAddModel} from "../../models/Course";
 import {CoursesApiActionTypes} from "./courses.action";
 
 export function coursesReducer(
@@ -18,14 +17,16 @@ export function coursesReducer(
       return {
         ...state,
         loading: true,
-        result: {successful: action.payload.successful, courses:action.payload.result},
+        successful: action.payload.successful,
+        result: { courses:action.payload.result},
       }
     }
     case CoursesApiActionTypes.RequestCoursesFail: {
       return {
         ...state,
         loading: false,
-        result: {successful: action.payload.successful, courses:action.payload.result},
+        successful: action.payload.successful,
+        result: {courses:action.payload.result},
       }
     }
     default: {
@@ -35,11 +36,10 @@ export function coursesReducer(
 }
 
 export function addCourseReducer(
-  state:CourseModelAdd = initialStateAddModel,
+  state:CourseModelRequest = initialStateAddModel,
   action: any
-): CourseModelAdd {
-    console.log("addCourseReducer action: ", action)
-    console.log("addCourseReducer state: ", state)
+): CourseModelRequest {
+
   switch (action.type) {
     case CoursesApiActionTypes.RequestAddCourse: {
       return {
@@ -66,6 +66,47 @@ export function addCourseReducer(
         successful:false,
       }
     }
+    case CoursesApiActionTypes.RequestCourseById: {
+      return {
+        ...state,
+        sendRequest:true,
+      }
+    }
+    case CoursesApiActionTypes.RequestCourseByIdSuccess: {
+      return {
+        ...state,
+        successful: action.payload.successful,
+        course: action.payload,
+      }
+    }
+    case CoursesApiActionTypes.RequestCourseByIdFail: {
+      return {
+        ...state,
+        successful: false,
+        error:action.payload
+      }
+    }
+    case CoursesApiActionTypes.RequestEditCourse: {
+      return {
+        ...state,
+        sendRequest:true,
+      }
+    }
+    case CoursesApiActionTypes.RequestEditCourseSuccess: {
+      return {
+        ...state,
+        successful: action.payload.successful,
+        course: action.payload,
+      }
+    }
+    case CoursesApiActionTypes.RequestEditCourseFail: {
+      return {
+        ...state,
+        successful: false,
+        error:action.payload
+      }
+    }
+
     default: {
       return state
     }
