@@ -4,10 +4,18 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import { of } from 'rxjs';
 import {CoursesService} from "../../services/courses.service";
 import {
-  CoursesApiActionTypes, RequestAddCourseFail,
-  RequestAddCourseSuccess, RequestCourseByIdFail, RequestCourseByIdSuccess,
+  CoursesApiActionTypes,
+  RequestAddCourseFail,
+  RequestAddCourseSuccess,
+  RequestCourseByIdFail,
+  RequestCourseByIdSuccess,
   RequestCoursesFail,
-  RequestCoursesSuccess, RequestEditCourse, RequestEditCourseFail, RequestEditCourseSuccess
+  RequestCoursesSuccess,
+  RequestDeleteCourseFail,
+  RequestDeleteCourseSuccess,
+  RequestEditCourse,
+  RequestEditCourseFail,
+  RequestEditCourseSuccess
 } from "./courses.action";
 import {CourseModel} from "../../models/CourseModel";
 
@@ -61,11 +69,25 @@ export class CoursesEffects {
       ofType(CoursesApiActionTypes.RequestEditCourse),
       switchMap((action:any) => this.courseService.editCourseObj(action.payload.course, action.payload.id).pipe(
           map((courses) => {
-            console.log("getCourseById$ Effect: ", courses.result);
-            console.log("getCourseById$ Effect action.payload: ", action.payload);
+            console.log("editCourse$ Effect: ", courses.result);
+            console.log("editCourse$ Effect action.payload: ", action.payload);
             return new RequestEditCourseSuccess(courses.result);
           }),
           catchError(error => of(new RequestEditCourseFail(error)))
+        )
+      )
+    );});
+
+  deleteCourse$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CoursesApiActionTypes.RequestDeleteCourse),
+      switchMap((action:any) => this.courseService.deleteCourseObj(action.payload).pipe(
+          map((courses) => {
+            console.log("getDeleteCourseById$ Effect: ", courses);
+            console.log("getDeleteCourseById$ Effect action.payload: ", action.payload);
+            return new RequestDeleteCourseSuccess(courses);
+          }),
+          catchError(error => of(new RequestDeleteCourseFail(error)))
         )
       )
     );});

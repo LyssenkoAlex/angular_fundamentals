@@ -39,7 +39,7 @@ export function addCourseReducer(
   state:CourseModelRequest = initialStateAddModel,
   action: any
 ): CourseModelRequest {
-
+  console.log("addCourseReducer: ", action)
   switch (action.type) {
     case CoursesApiActionTypes.RequestAddCourse: {
       return {
@@ -100,6 +100,25 @@ export function addCourseReducer(
       }
     }
     case CoursesApiActionTypes.RequestEditCourseFail: {
+      return {
+        ...state,
+        successful: false,
+        error:action.payload
+      }
+    }
+    case CoursesApiActionTypes.RequestDeleteCourse: {
+      return {
+        ...state,
+        sendRequest:true,
+      }
+    }
+    case CoursesApiActionTypes.RequestDeleteCourseSuccess: {
+      return {
+        ...state,
+        successful: action.payload.successful
+      }
+    }
+    case CoursesApiActionTypes.RequestDeleteCourseFail: {
       return {
         ...state,
         successful: false,

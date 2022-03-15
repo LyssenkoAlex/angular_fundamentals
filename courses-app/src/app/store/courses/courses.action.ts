@@ -16,6 +16,9 @@ export enum CoursesApiActionTypes {
   RequestEditCourse = 'RequestEditCourse',
   RequestEditCourseSuccess = 'RequestEditCourseSuccess',
   RequestEditCourseFail = 'RequestEditCourseFail',
+  RequestDeleteCourse = 'RequestDeleteCourse',
+  RequestDeleteCourseSuccess = 'RequestDeleteCourseSuccess',
+  RequestDeleteCourseFail = 'RequestDeleteCourseFail',
 
 }
 
@@ -90,4 +93,18 @@ export class RequestEditCourseFail implements Action {
   readonly type = CoursesApiActionTypes.RequestEditCourseFail
 }
 
+export class RequestDeleteCourse implements Action {
+  constructor(public payload:string) {}
+  readonly type = CoursesApiActionTypes.RequestDeleteCourse
+}
+
+export class RequestDeleteCourseSuccess implements Action {
+  constructor(public payload:any) {}
+  readonly type = CoursesApiActionTypes.RequestDeleteCourseSuccess
+}
+
+export class RequestDeleteCourseFail implements Action {
+  constructor(public payload:any) {}
+  readonly type = CoursesApiActionTypes.RequestDeleteCourseFail
+}
 

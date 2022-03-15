@@ -20,7 +20,7 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
 import {CourseDetailsComponent} from './feature/course-details/course-details.component';
 import {EditCourseComponent} from './feature/edit-course/edit-course.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import { AuthorsComponent } from './feature/authors/authors.component';
+import {AuthorsComponent} from './feature/authors/authors.component';
 import {TokenInterceptorService} from "./auth/interceptors/token.interceptor";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {StoreModule} from "@ngrx/store";
@@ -82,18 +82,21 @@ import {CoursesEffects} from "./store/courses/courses.effect";
     }),
     StoreModule.forFeature('course-by-id', addCourseReducer, {
       initialState: initialStateAddModel
-    }), StoreModule.forFeature('edit-coursed', addCourseReducer, {
+    }), StoreModule.forFeature('edit-course', addCourseReducer, {
+      initialState: initialStateAddModel
+    }),
+    StoreModule.forFeature('delete-course', addCourseReducer, {
       initialState: initialStateAddModel
     }),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([CoursesEffects, AuthorEffects]),
     StoreDevtoolsModule.instrument({})
   ],
-  providers: [ {
+  providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
-  },[AuthorsFacade]],
+  }, [AuthorsFacade]],
   bootstrap: [AppComponent]
 })
 export class AppModule {

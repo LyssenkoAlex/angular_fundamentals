@@ -8,7 +8,7 @@ import {
   RequestAddCourseReSet,
   RequestCourseById,
   RequestCourseByIdFail,
-  RequestCourses, RequestEditCourse
+  RequestCourses, RequestDeleteCourse, RequestEditCourse
 } from "./courses.action";
 import {CourseModel} from "../../models/CourseModel";
 
@@ -22,6 +22,7 @@ export class CoursesFacade {
   getAddCourseResult$:Observable<CourseModelRequest> = this.store.select(courseQuery.getAddCourseSuccess)
   getCourseByIdResult$:Observable<CourseModelRequest> = this.store.select(courseQuery.getCourseByIdSuccess)
   getEditCourseResult$:Observable<CourseModelRequest> = this.store.select(courseQuery.getEditCourseSuccess)
+  getDeleteCourseResult$:Observable<CourseModelRequest> = this.store.select(courseQuery.getDeleteCourseSuccess)
 
 
   constructor(private store:Store<CoursesState>) {}
@@ -41,5 +42,8 @@ export class CoursesFacade {
   }
   editCourse(course:CourseModel, id:string) {
     this.store.dispatch(new RequestEditCourse({course:course, id:id}))
+  }
+  deleteCourse(id:string){
+    this.store.dispatch(new RequestDeleteCourse(id))
   }
 }

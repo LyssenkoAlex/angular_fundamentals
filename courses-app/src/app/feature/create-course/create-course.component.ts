@@ -69,7 +69,6 @@ export class CreateCourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.getAddCourseResult$.subscribe((res:CourseModelRequest) => {
-      console.log("CourseModelAdd resp: ", res)
       if(res.successful) {
         this.router.navigate(['/courses'])
         this.store.resetState()

@@ -1,16 +1,16 @@
 <div class="wrapper">
   <div class="description">
     <a
-      [routerLink]="['/courses/', course?.id]">
+      [routerLink]="['/courses/', course.id]">
       View: {{ course?.title }}
     </a>
     <div *ngIf="isAdmin">
       <a
-        [routerLink]="['/courses/edit/', course?.id]">
+        [routerLink]="['/courses/edit/', course.id]">
         Edit: {{ course?.title }}
       </a>
       <div>
-      <button type=button class="btn btn-primary"  (click)="clickMethod(course?.id)">Delete me</button>
+      <button type=button class="btn btn-primary"  (click)="clickMethod(course.id)">Delete me</button>
       </div>
     </div>
     <p>{{course?.description}}</p>

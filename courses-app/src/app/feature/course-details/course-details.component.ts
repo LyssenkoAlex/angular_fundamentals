@@ -27,10 +27,8 @@ export class CourseDetailsComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       if (this.id) {
-        console.log("this.id: ", this.id)
         this.store.getCourseById(this.id)
         this.store.getCourseByIdResult$.subscribe((res:CourseModelRequest) => {
-          console.log("CourseDetailsComponent resp: ", res)
           Object.assign(this.course, res.course)
 
           let date: Date = new Date(this.course.creationDate)

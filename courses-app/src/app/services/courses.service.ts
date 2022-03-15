@@ -44,7 +44,6 @@ export class CoursesService {
   }
 
   getCourseObj(id: string): Observable<any>{
-    console.log("service: getCourseObj: ", id)
     return this.httpClient.get<any>(this.API_BY_ID_COURSES + id)
   }
 
@@ -62,8 +61,12 @@ export class CoursesService {
   }
 
   editCourseObj(data: CourseModel, id:string): Observable<any>{
-    console.log("service: getCourseObj: ", id)
     return this.httpClient.put<any>(this.API_EDIT_COURSES + id, data)
+  }
+
+  deleteCourseObj(id:string): Observable<any>{
+    console.log("service: getCourseObj: ", id)
+    return this.httpClient.delete<any>(this.API_DELETE_COURSES + id)
   }
 
   editCourse = async (data: CourseModel, id:string) => {

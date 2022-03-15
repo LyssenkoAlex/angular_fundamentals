@@ -1,15 +1,11 @@
-# angular_fundamentals task 3 module 3
-1.  [1 points] Implement app-routing.module.ts with such lazy load modules.  **done**
+# angular_fundamentals task 4 
+1. [1 point] Create initial boilerplate.  **done**
+2. [1.5 points] Add User's store & effects **not done**
+3. [1.5 points] Add Auth store & effects **not done**
+4. [1.5 points] Add Author's store & effects **done**
+5. [1.5 points] Add Course's store & effects **done**
+6. [3 points] Finish app transformation and replace all the mocks/services inside components/features
+    to facades usage. **partially**
 
 
-2. [2 points] Implement authors API & store services. **done**
-  
-3.  [2 points] Implement courses API & store services. **done**
-
-4. [2 points] Implement authorization by creating auth module. **done**
-
-5.  [1 point] Implement user module. **done**
-
-6.  [2 points] Integrate earlier created components with pages and services. **partially done**
-
-## Total: 8 points
+## Total: 5.5 points

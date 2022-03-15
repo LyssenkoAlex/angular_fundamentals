@@ -35,7 +35,6 @@ export function reducer(
 }
 
 export function addActionReducer(state:AuthorModelAdd = initialStateAddModel, action:any):AuthorModelAdd {
-  console.log("addActionReducer: ", action)
   switch (action.type) {
     case AuthorsApiActionTypes.RequestAddAuthor: {
       return {

@@ -30,7 +30,6 @@ export class AuthorsComponent implements OnInit{
       this.authors = resp.result.authors
     })
     this.store.getAddAuthorResult$.subscribe((result) => {
-      console.log("****getAddAuthorResult$: ", result)
       this.addResult = result
     })
   }

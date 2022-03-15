@@ -25,7 +25,7 @@ import {EditCourseResolverResolver} from "../resolvers/edit-course-resolver.reso
         path: 'courses',
         canLoad: [AuthorizedGuard],
         loadChildren: () => import('../feature/courses/courses.module').then(m => m.CoursesModule),
-        resolve: {preFetchData: CoursesResolverResolver}
+        // resolve: {preFetchData: CoursesResolverResolver}
       },
       {
         path: 'courses/add',
@@ -41,7 +41,7 @@ import {EditCourseResolverResolver} from "../resolvers/edit-course-resolver.reso
         path: 'courses/edit/:id',
         canActivate: [AdminGuard],
         loadChildren: () => import('../feature/edit-course/edit-course.module').then(m => m.EditCourseModule),
-        resolve: {preFetchData: EditCourseResolverResolver}
+        // resolve: {preFetchData: EditCourseResolverResolver}
       },
       {
         path: 'authors',

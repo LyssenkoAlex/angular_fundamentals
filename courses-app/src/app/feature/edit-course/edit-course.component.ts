@@ -33,7 +33,6 @@ export class EditCourseComponent implements OnInit {
         this.store.getCourseById(this.id)
 
         this.store.getCourseByIdResult$.subscribe((res:CourseModelRequest) => {
-          console.log("CourseDetailsComponent resp: ", res)
           Object.assign(this.course, res.course)
 
           let date = new Date(this.course.creationDate)

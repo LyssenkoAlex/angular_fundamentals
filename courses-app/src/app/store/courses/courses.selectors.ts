@@ -22,7 +22,6 @@ const getAddCourseFail = createSelector(getAddCourseState, (state:CourseModelReq
 const getCourseByIdState = createFeatureSelector<CourseModelRequest>('course-by-id')
 const getCourseById = createSelector(getCourseByIdState, (state) => state.sendRequest)
 const getCourseByIdSuccess = createSelector(getCourseByIdState, getCourseById, (state:CourseModelRequest, sendRequest) => {
-  console.log("createSelector getCourseByIdSuccess: ", state)
   return sendRequest ? state : initialStateAddModel
 })
 const getCourseByIdFail = createSelector(getCourseByIdState, (state:CourseModelRequest) => state.error)
@@ -30,10 +29,18 @@ const getCourseByIdFail = createSelector(getCourseByIdState, (state:CourseModelR
 const getEditCourseState = createFeatureSelector<CourseModelRequest>('edit-course')
 const getEditCourse = createSelector(getEditCourseState, (state) => state.sendRequest)
 const getEditCourseSuccess = createSelector(getEditCourseState, getEditCourse, (state:CourseModelRequest, sendRequest) => {
-  console.log("createSelector getEditCourse: ", state)
   return sendRequest ? state : initialStateAddModel
 })
 const getEditCourseFail = createSelector(getEditCourseState, (state:CourseModelRequest) => state.error)
+
+const getDeleteCourseState = createFeatureSelector<CourseModelRequest>('delete-course')
+const getDeleteCourse = createSelector(getDeleteCourseState, (state) => state.sendRequest)
+const getDeleteCourseSuccess = createSelector(getDeleteCourseState, getDeleteCourse, (state:CourseModelRequest, sendRequest) => {
+  console.log("selector getDeleteCourseSuccess: ", state)
+  return sendRequest ? state : initialStateAddModel
+})
+const getDeleteCourseFail = createSelector(getDeleteCourseState, (state:CourseModelRequest) => state.error)
+
 
 export const courseQuery = {
   getRequestCourses,
@@ -47,5 +54,7 @@ export const courseQuery = {
   getCourseByIdFail,
   getEditCourse,
   getEditCourseSuccess,
-  getEditCourseFail
+  getEditCourseFail,
+  getDeleteCourseSuccess,
+  getDeleteCourseFail,
 }

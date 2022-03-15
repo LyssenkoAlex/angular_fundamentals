@@ -22,7 +22,6 @@ export class AuthorEffects {
       ofType(AuthorsApiActionTypes.RequestAuthors),
       switchMap((action) => this.authorService.getAuthorOb().pipe(
           map((users) => {
-            console.log("Effect: ", users);
             return new RequestAuthorsSuccess(users);
           }),
           catchError(error => of(new RequestAuthorsFail(error)))
@@ -35,7 +34,6 @@ export class AuthorEffects {
       ofType(AuthorsApiActionTypes.RequestAddAuthor),
       switchMap((action:any) => this.authorService.addAuthorOb(action.payload).pipe(
           map((result:AuthorModelAdd) => {
-            console.log("RequestAddAuthor: ", result)
             return new RequestAddAuthorSuccess(result);
           }),
           catchError(error => of(new RequestAddAuthorFail(error)))
